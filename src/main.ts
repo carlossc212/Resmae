@@ -16,13 +16,15 @@ const createWindow = () => {
     height: 600,
     x: primaryDisplay.bounds.x + (width - 800) / 2,
     y: primaryDisplay.bounds.y + (height - 600) / 2,
+    
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       devTools: false,
-      nodeIntegration: false
+      nodeIntegration: false,
     },
   });
-
+  
+  mainWindow.menuBarVisible = false;
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);     
   } else {
