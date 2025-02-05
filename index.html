@@ -2,8 +2,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Facmae</title>
-  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -11,40 +9,66 @@
     <header>
       <div class="image-text">
         <span class="image">
-          <img src="link imagen" alt="Facmae">
+          <img src="/src/logo.jpeg" alt="Facmae">
         </span>
         <div class="text logo-text">
           <span class="name">Facmae</span>
           <span class="profession">Facturas</span>
         </div>
       </div>
-      <i class='bx bx-chevron-right toggle'></i>
+      <div class="toggle">
+        <img src="/src/icons/bx-chevron-right.svg">
+      </div>
+      
     </header>
 
     <div class="menu-bar">
       <div class="menu">
         <li class="search-box">
-          <i class='bx bx-search icon'></i>
+          <div class="icon search-icon"></div>
           <input type="text" placeholder="Buscar...">
         </li>
         <ul class="menu-links">
-          <li class="nav-link"><a href="#dashboard"><i class='bx bx-home-alt icon'></i><span class="text nav-text">Dashboard</span></a></li>
-          <li class="nav-link"><a href="#revenue"><i class='bx bx-bar-chart-alt-2 icon'></i><span class="text nav-text">Revenue</span></a></li>
-          <li class="nav-link"><a href="#notifications"><i class='bx bx-bell icon'></i><span class="text nav-text">Notificaciones</span></a></li>
-          <li class="nav-link"><a href="#analytics"><i class='bx bx-pie-chart-alt icon'></i><span class="text nav-text">Analíticas</span></a></li>
+          <ul class="menu-links">
+            <li class="nav-link">
+              <a href="#home">
+                <div class="icon home-icon"></div>
+                <span class="text nav-text">Inicio</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="#invoices">
+                <div class="icon invoices-icon"></div>
+                <span class="text nav-text">Facturas</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="#products">
+                <div class="icon products-icon"></div>
+                <span class="text nav-text">Productos</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="#settings">
+                <div class="icon settings-icon"></div>
+                <span class="text nav-text">Configuración</span>
+              </a>
+            </li>
+          </ul>
+          
         </ul>
       </div>
 
       <div class="bottom-content">
         <li class="exit-button">
-          <a href="#"><i class='bx bx-log-out icon'></i><span class="text nav-text">Salir</span></a>
+          <div class="icon exit-icon"></div><span class="text nav-text">Salir</span></a>
         </li>
         <li class="mode">
           <div class="sun-moon">
-            <i class='bx bx-moon icon moon'></i>
-            <i class='bx bx-sun icon sun'></i>
+            <i class="icon sun-icon sun"></i>
+            <i class="icon moon-icon moon"></i>
           </div>
-          <span class="mode-text text">Modo oscuro</span>
+          <span class="mode-text text">Modo claro</span>
           <div class="toggle-switch"><span class="switch"></span></div>
         </li>
       </div>
@@ -53,21 +77,51 @@
 
   <!-- Contenido Principal con Vistas Dinámicas -->
   <section class="home">
-    <div id="dashboard" class="view active">
-      <h2 class="title">📊 Dashboard</h2>
+    <div id="home" class="view active">
+      <h2 class="title">Inicio</h2>
       <p class="text">Bienvenido al panel de control.</p>
     </div>
-    <div id="revenue" class="view">
-      <h2>💰 Revenue</h2>
-      <p>Información de ingresos.</p>
+    <div id="invoices" class="view">
+      <h2>Facturas</h2>
+      <p>Información de facturas.</p>
     </div>
-    <div id="notifications" class="view">
-      <h2>🔔 Notificaciones</h2>
-      <p>Lista de notificaciones importantes.</p>
+    <div id="products" class="view">
+      <h2 class="title spacing"><span>Productos</span>
+        <div>
+          <button class="add-product-btn">Añadir</button>
+          <button class="add-product-btn">Añadir</button>
+        </div>
+        </h2>
+      <table class="products-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Producto 1</td>
+            <td>Descripción del Producto 1</td>
+            <td>€10.00</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Producto 2</td>
+            <td>Descripción del Producto 2</td>
+            <td>€20.00</td>
+          </tr>
+          <!-- Agrega más filas de productos aquí -->
+        </tbody>
+      </table>
     </div>
-    <div id="analytics" class="view">
-      <h2>📈 Analíticas</h2>
-      <p>Datos y estadísticas analíticas.</p>
+    
+    <div id="settings" class="view">
+      <h2>Configuración</h2>
+      <p>Ajustes de la aplicación.</p>
     </div>
   </section>
 
