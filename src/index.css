@@ -139,19 +139,16 @@ header .image-text .profession {
   height: 24px;
   width: 24px;
   background-color: var(--primary-color);
-  color: var(--sidebar-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
   cursor: pointer;
   transition: var(--tran-05);
-  background-image: url("/src/icons/bx-chevron-right.svg");
 }
 
-body.dark .sidebar header .toggle {
-  color: var(--text-color);
+.sidebar header .toggle img {
+  filter: invert(100%);
 }
 
 .sidebar.close .toggle {
@@ -245,16 +242,13 @@ body.dark .exit-button:hover .text {
   position: absolute;
 }
 
-.mode .sun-moon i.sun {
+/* En modo claro: Mostrar sol y ocultar luna */
+.mode .sun-moon i.moon, body.dark .mode .sun-moon i.sun {
   opacity: 0;
 }
 
-body.dark .mode .sun-moon i.sun {
+.mode .sun-moon i.sun, body.dark .mode .sun-moon i.moon {
   opacity: 1;
-}
-
-body.dark .mode .sun-moon i.moon {
-  opacity: 0;
 }
 
 .menu-bar .bottom-content .toggle-switch {
