@@ -1,98 +1,76 @@
 <!DOCTYPE html>
-<html lang="es" >
 <head>
   <meta charset="UTF-8">
   <title>Facmae</title>
-  <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap'><link rel="stylesheet" href="./style.css">
-
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<nav class="sidebar close">
-  <header>
-    <div class="image-text">
-      <span class="image">
-        <img src="https://drive.google.com/uc?export=view&id=1ETZYgPpWbbBtpJnhi42_IR3vOwSOpR4z" alt="">
-      </span>
+  <nav class="sidebar close">
+    <header>
+      <div class="image-text">
+        <span class="image">
+          <img src="link imagen" alt="Facmae">
+        </span>
+        <div class="text logo-text">
+          <span class="name">Facmae</span>
+          <span class="profession">Facturas</span>
+        </div>
+      </div>
+      <i class='bx bx-chevron-right toggle'></i>
+    </header>
 
-      <div class="text logo-text">
-        <span class="name">Facmae</span>
-        <span class="profession">Facturas</span>
+    <div class="menu-bar">
+      <div class="menu">
+        <li class="search-box">
+          <i class='bx bx-search icon'></i>
+          <input type="text" placeholder="Buscar...">
+        </li>
+        <ul class="menu-links">
+          <li class="nav-link"><a href="#dashboard"><i class='bx bx-home-alt icon'></i><span class="text nav-text">Dashboard</span></a></li>
+          <li class="nav-link"><a href="#revenue"><i class='bx bx-bar-chart-alt-2 icon'></i><span class="text nav-text">Revenue</span></a></li>
+          <li class="nav-link"><a href="#notifications"><i class='bx bx-bell icon'></i><span class="text nav-text">Notificaciones</span></a></li>
+          <li class="nav-link"><a href="#analytics"><i class='bx bx-pie-chart-alt icon'></i><span class="text nav-text">Analíticas</span></a></li>
+        </ul>
+      </div>
+
+      <div class="bottom-content">
+        <li class="exit-button">
+          <a href="#"><i class='bx bx-log-out icon'></i><span class="text nav-text">Salir</span></a>
+        </li>
+        <li class="mode">
+          <div class="sun-moon">
+            <i class='bx bx-moon icon moon'></i>
+            <i class='bx bx-sun icon sun'></i>
+          </div>
+          <span class="mode-text text">Modo oscuro</span>
+          <div class="toggle-switch"><span class="switch"></span></div>
+        </li>
       </div>
     </div>
+  </nav>
 
-    <i class='bx bx-chevron-right toggle'></i>
-  </header>
-
-  <div class="menu-bar">
-    <div class="menu">
-
-      <li class="search-box">
-        <i class='bx bx-search icon'></i>
-        <input type="text" placeholder="Buscar...">
-      </li>
-
-      <ul class="menu-links">
-        <li class="nav-link">
-          <a href="#">
-            <i class='bx bx-home-alt icon'></i>
-            <span class="text nav-text">Dashboard</span>
-          </a>
-        </li>
-
-        <li class="nav-link">
-          <a href="#">
-            <i class='bx bx-bar-chart-alt-2 icon'></i>
-            <span class="text nav-text">Revenue</span>
-          </a>
-        </li>
-
-        <li class="nav-link">
-          <a href="#">
-            <i class='bx bx-bell icon'></i>
-            <span class="text nav-text">Notificaciones</span>
-          </a>
-        </li>
-
-        <li class="nav-link">
-          <a href="#">
-            <i class='bx bx-pie-chart-alt icon'></i>
-            <span class="text nav-text">Analiticas</span>
-          </a>
-        </li>
-
-      </ul>
+  <!-- Contenido Principal con Vistas Dinámicas -->
+  <section class="home">
+    <div id="dashboard" class="view active">
+      <h2 class="title">📊 Dashboard</h2>
+      <p class="text">Bienvenido al panel de control.</p>
     </div>
-
-    <div class="bottom-content">
-      <li class="">
-        <a href="#">
-          <i class='bx bx-log-out icon'></i>
-          <span class="text nav-text">Salir</span>
-        </a>
-      </li>
-
-      <li class="mode">
-        <div class="sun-moon">
-          <i class='bx bx-moon icon moon'></i>
-          <i class='bx bx-sun icon sun'></i>
-        </div>
-        <span class="mode-text text">Modo oscuro</span>
-
-        <div class="toggle-switch">
-          <span class="switch"></span>
-        </div>
-      </li>
-
+    <div id="revenue" class="view">
+      <h2>💰 Revenue</h2>
+      <p>Información de ingresos.</p>
     </div>
-  </div>
+    <div id="notifications" class="view">
+      <h2>🔔 Notificaciones</h2>
+      <p>Lista de notificaciones importantes.</p>
+    </div>
+    <div id="analytics" class="view">
+      <h2>📈 Analíticas</h2>
+      <p>Datos y estadísticas analíticas.</p>
+    </div>
+  </section>
 
-</nav>
-
-<section class="home">
-  <div class="text">Aplicación facturas</div>
-</section>
   <script type="module" src="/src/renderer.ts"></script>
-
 </body>
 </html>

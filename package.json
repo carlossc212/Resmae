@@ -1,6 +1,6 @@
 {
-  "name": "facmae",
-  "productName": "facmae",
+  "name": "Facmae",
+  "productName": "Facmae",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".vite/build/main.js",
