@@ -6,7 +6,6 @@
 }
 
 :root {
-  /* ===== Colors ===== */
   --body-color: #e4e9f7;
   --sidebar-color: #fff;
   --primary-color: #dc143c;
@@ -14,7 +13,6 @@
   --toggle-color: #ddd;
   --text-color: #707070;
 
-  /* ====== Transition ====== */
   --tran-03: all 0.2s ease;
   --tran-03: all 0.3s ease;
   --tran-04: all 0.3s ease;
@@ -41,7 +39,6 @@ body.dark {
   --text-color: #ccc;
 }
 
-/* ===== Sidebar ===== */
 .sidebar {
   position: fixed;
   top: 0;
@@ -53,11 +50,11 @@ body.dark {
   transition: var(--tran-05);
   z-index: 100;
 }
+
 .sidebar.close {
   width: 88px;
 }
 
-/* ===== Reusable code - Here ===== */
 .sidebar li {
   height: 50px;
   list-style: none;
@@ -80,10 +77,6 @@ body.dark {
   align-items: center;
   justify-content: center;
   font-size: 20px;
-}
-
-.sidebar .text,
-.sidebar .icon {
   color: var(--text-color);
   transition: var(--tran-03);
 }
@@ -93,11 +86,13 @@ body.dark {
   font-weight: 500;
   white-space: nowrap;
   opacity: 1;
+  color: var(--text-color);
+  transition: var(--tran-03);
 }
+
 .sidebar.close .text {
   opacity: 0;
 }
-/* =========================== */
 
 .sidebar header {
   position: relative;
@@ -107,10 +102,12 @@ body.dark {
   display: flex;
   align-items: center;
 }
+
 .sidebar header .logo-text {
   display: flex;
   flex-direction: column;
 }
+
 header .image-text .name {
   margin-top: 2px;
   font-size: 20px;
@@ -139,8 +136,8 @@ header .image-text .profession {
   top: 50%;
   right: -25px;
   transform: translateY(-50%) rotate(180deg);
-  height: 25px;
-  width: 25px;
+  height: 24px;
+  width: 24px;
   background-color: var(--primary-color);
   color: var(--sidebar-color);
   border-radius: 50%;
@@ -150,6 +147,7 @@ header .image-text .profession {
   font-size: 24px;
   cursor: pointer;
   transition: var(--tran-05);
+  background-image: url("/src/icons/bx-chevron-right.svg");
 }
 
 body.dark .sidebar header .toggle {
@@ -164,7 +162,7 @@ body.dark .sidebar header .toggle {
   margin-top: 40px;
 }
 
-.sidebar li.search-box {
+.sidebar li.search-box, .exit-button {
   border-radius: 6px;
   background-color: var(--primary-color-light);
   cursor: pointer;
@@ -183,7 +181,8 @@ body.dark .sidebar header .toggle {
   font-weight: 500;
   transition: var(--tran-05);
 }
-.sidebar li a {
+
+.sidebar li a, .exit-button {
   list-style: none;
   height: 100%;
   background-color: transparent;
@@ -196,16 +195,26 @@ body.dark .sidebar header .toggle {
   transition: var(--tran-03);
 }
 
-.sidebar li a:hover {
+.sidebar li a:hover, .exit-button:hover {
   background-color: var(--primary-color);
 }
+
 .sidebar li a:hover .icon,
-.sidebar li a:hover .text {
+.sidebar li a:hover .text,
+.exit-button:hover .icon,
+.exit-button:hover .text {
   color: var(--sidebar-color);
 }
+
 body.dark .sidebar li a:hover .icon,
-body.dark .sidebar li a:hover .text {
+body.dark .sidebar li a:hover .text,
+body.dark .exit-button:hover .icon,
+body.dark .exit-button:hover .text {
   color: var(--text-color);
+}
+
+.nav-link a:hover .icon, .exit-button:hover .icon {
+  background-color: var(--sidebar-color);
 }
 
 .sidebar .menu-bar {
@@ -215,9 +224,11 @@ body.dark .sidebar li a:hover .text {
   justify-content: space-between;
   overflow-y: scroll;
 }
+
 .menu-bar::-webkit-scrollbar {
   display: none;
 }
+
 .sidebar .menu-bar .mode {
   border-radius: 6px;
   background-color: var(--primary-color-light);
@@ -233,12 +244,15 @@ body.dark .sidebar li a:hover .text {
 .mode .sun-moon i {
   position: absolute;
 }
+
 .mode .sun-moon i.sun {
   opacity: 0;
 }
+
 body.dark .mode .sun-moon i.sun {
   opacity: 1;
 }
+
 body.dark .mode .sun-moon i.moon {
   opacity: 0;
 }
@@ -254,6 +268,7 @@ body.dark .mode .sun-moon i.moon {
   border-radius: 6px;
   cursor: pointer;
 }
+
 .toggle-switch .switch {
   position: relative;
   height: 22px;
@@ -290,6 +305,7 @@ body.dark .switch::before {
   background-color: var(--body-color);
   transition: var(--tran-05);
 }
+
 .home .title {
   font-size: 30px;
   font-weight: 500;
@@ -309,6 +325,7 @@ body.dark .switch::before {
   height: 100vh;
   width: calc(100% - 78px);
 }
+
 body.dark .home .text, .home .title {
   color: var(--text-color);
 }
@@ -318,5 +335,59 @@ body.dark .home .text, .home .title {
 }
 
 .view.active {
+  display: block;
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+  background-color: var(--text-color);
+  mask-size: 25px 25px;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  transition: var(--tran-03);
+}
+
+.chevron-right-icon {
+  mask-image: url("/src/icons/bx-chevron-right.svg");
+}
+
+.search-icon {
+  mask-image: url("/src/icons/bx-search.svg");
+}
+
+.home-icon {
+  mask-image: url("/src/icons/bx-home-alt.svg");
+}
+
+.invoices-icon {
+  mask-image: url("/src/icons/bxs-file.svg");
+}
+
+.products-icon {
+  mask-image: url("/src/icons/bx-data.svg");
+}
+
+.settings-icon {
+  mask-image: url("/src/icons/bx-cog.svg");
+}
+
+.exit-icon {
+  mask-image: url("/src/icons/bx-log-out.svg");
+}
+
+.moon-icon {
+  mask-image: url("/src/icons/bx-moon.svg");
+}
+
+.sun-icon {
+  mask-image: url("/src/icons/bx-sun.svg");
+}
+
+.moon-icon, .dark .sun-icon {
+  display: none;
+}
+
+.sun-icon, .dark .moon-icon {
   display: block;
 }
