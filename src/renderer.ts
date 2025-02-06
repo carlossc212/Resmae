@@ -16,9 +16,48 @@ const body = document.querySelector("body"),
   navLinks = document.querySelectorAll(".nav-link a"),
   addProductButton = body.querySelector(".add-product-button");
 
-  document.addEventListener("dragstart", (event) => {
-    event.preventDefault(); // Bloquea el arrastre de imágenes y otros elementos
-  });  
+document.addEventListener("dragstart", (event) => {
+  event.preventDefault(); // Bloquea el arrastre de imágenes y otros elementos
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  updateProductsTable();
+});
+
+async function updateProductsTable() {
+  try {
+    const products: Array<{ id: number; name: string; description: string; price: number }> = await window.electronAPI.getProducts();
+    
+    const tbody = document.querySelector('.products-table tbody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    
+    products.forEach(product => {
+      const tr = document.createElement('tr');
+      
+      const tdId = document.createElement('td');
+      tdId.innerText = product.id.toString();
+      
+      const tdName = document.createElement('td');
+      tdName.innerText = product.name;
+      
+      const tdDesc = document.createElement('td');
+      tdDesc.innerText = product.description;
+      
+      const tdPrice = document.createElement('td');
+      tdPrice.innerText = `€${product.price.toFixed(2)}`;
+      
+      tr.appendChild(tdId);
+      tr.appendChild(tdName);
+      tr.appendChild(tdDesc);
+      tr.appendChild(tdPrice);
+      
+      tbody.appendChild(tr);
+    });
+  } catch (error) {
+    console.error('Error al actualizar la tabla de productos:', error);
+  }
+}
 
 exitButton.addEventListener("click", () => {
     window.close();
@@ -47,13 +86,13 @@ navLinks.forEach(link => {
         event.preventDefault(); // Evita recargar la página
 
         // Obtener el ID de la vista desde el href del enlace
-        const targetId = link.getAttribute("href")?.replace("#", "");
+        const targetId = link.getAttribute("href").replace("#", "");
 
         // Ocultar todas las vistas
         views.forEach(view => view.classList.remove("active"));
 
         // Mostrar solo la vista seleccionada
-        document.getElementById(targetId!)?.classList.add("active");
+        document.getElementById(targetId).classList.add("active");
     });
 });
 
@@ -62,6 +101,7 @@ window.electronAPI.onaddproduct((_, error) => {
     alert("Ha ocurrido un error al agregar el producto");
   } else {
     alert("Producto agregado correctamente");
+    updateProductsTable();
   }
 });
 

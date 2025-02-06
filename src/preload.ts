@@ -5,5 +5,6 @@ import { contextBridge, ipcRenderer } from "electron";
 contextBridge.exposeInMainWorld("electronAPI", {
     generateInvoice: (filename: string) => ipcRenderer.invoke("generate-invoice", filename),
     addProduct: (name: string, description: string, price: number) => ipcRenderer.invoke('add-product', { name, description, price }),
-    onaddproduct: (callback: (error: Error | null) => void) => ipcRenderer.on('product-added', (_, error) => callback(error))
+    onaddproduct: (callback: (error: Error | null) => void) => ipcRenderer.on('product-added', (_, error) => callback(error)),
+    getProducts: () => ipcRenderer.invoke('get-products')
 });

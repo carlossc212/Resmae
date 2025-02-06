@@ -23,3 +23,17 @@ export function addProduct(name: string, description: string, price: number) {
         renderedWindow.webContents.send('product-added', error);
     });
 }
+
+export function getProducts(): Promise<{ id: number; name: string; description: string; price: number }[]> {
+    return new Promise((resolve, reject) => {
+      db.all('SELECT * FROM products', (err, rows) => {
+        if (err) {
+          console.error('Error al obtener productos:', err);
+          reject(err);
+        } else {
+          resolve(rows as { id: number; name: string; description: string; price: number }[]);
+        }
+      });
+    });
+  }
+  
