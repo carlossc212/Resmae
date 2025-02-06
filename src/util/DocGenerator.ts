@@ -1,4 +1,5 @@
 import { PDFDocument, PDFFont, PDFPage, PDFPageDrawTextOptions, RGB, rgb, StandardFonts } from "pdf-lib";
+import * as xmlbuilder from "xmlbuilder2";
 import fs from "fs";
 
 export async function generateInvoice(filename: string) {
@@ -241,6 +242,145 @@ export async function generateInvoice(filename: string) {
     pdf.save();
 }
 
+export function generateFacturae() {
+    const facturae = xmlbuilder.create({ version: "1.0", encoding: "UTF-8" })
+      .ele("fe:Facturae", { 
+        "xmlns:fe": "http://www.facturae.gob.es/formato/Versiones/Facturaev3_2_2.xml",
+        "xmlns:ds": "http://www.w3.org/2000/09/xmldsig#"
+      })
+        .ele("FileHeader")
+          .ele("SchemaVersion").txt("3.2.2").up()
+          .ele("Modality").txt("I").up()
+          .ele("InvoiceIssuerType").txt("EM").up()
+          .ele("Batch")
+            .ele("BatchIdentifier").txt("12345678-Z SER/000001").up()
+            .ele("InvoicesCount").txt("1").up()
+            .ele("TotalInvoicesAmount")
+              .ele("TotalAmount").txt("100.00").up()
+            .up()
+            .ele("TotalOutstandingAmount")
+              .ele("TotalAmount").txt("100.00").up()
+            .up()
+            .ele("TotalExecutableAmount")
+              .ele("TotalAmount").txt("100.00").up()
+            .up()
+            .ele("InvoiceCurrencyCode").txt("EUR").up()
+          .up()
+        .up()
+        .ele("Parties")
+          .ele("SellerParty")
+            .ele("TaxIdentification")
+              .ele("PersonTypeCode").txt("F").up()
+              .ele("ResidenceTypeCode").txt("R").up()
+              .ele("TaxIdentificationNumber").txt("12345678Z").up()
+            .up()
+            .ele("LegalEntity")
+              .ele("CorporateName").txt("Empresa Vendedora SL").up()
+              .ele("AddressInSpain")
+                .ele("Address").txt("Calle Mayor 123").up()
+                .ele("PostCode").txt("28001").up()
+                .ele("Town").txt("Madrid").up()
+                .ele("Province").txt("Madrid").up()
+                .ele("CountryCode").txt("ESP").up()
+              .up()
+            .up()
+          .up()
+          .ele("BuyerParty")
+            .ele("TaxIdentification")
+              .ele("PersonTypeCode").txt("F").up()
+              .ele("ResidenceTypeCode").txt("R").up()
+              .ele("TaxIdentificationNumber").txt("75125417B").up()
+            .up()
+            .ele("Individual")
+              .ele("Name").txt("Juan").up()
+              .ele("FirstSurname").txt("Pérez").up()
+              .ele("AddressInSpain")
+                .ele("Address").txt("Av. Libertad 45").up()
+                .ele("PostCode").txt("41001").up()
+                .ele("Town").txt("Sevilla").up()
+                .ele("Province").txt("Sevilla").up()
+                .ele("CountryCode").txt("ESP").up()
+              .up()
+            .up()
+          .up()
+        .up()
+        .ele("Invoices")
+          .ele("Invoice")
+            .ele("InvoiceHeader")
+              .ele("InvoiceNumber").txt("000001").up()
+              .ele("InvoiceSeriesCode").txt("SER").up()
+              .ele("InvoiceDocumentType").txt("FC").up()
+              .ele("InvoiceClass").txt("OO").up()
+            .up()
+            .ele("InvoiceIssueData")
+              .ele("IssueDate").txt("2025-01-11").up()
+              .ele("InvoiceCurrencyCode").txt("EUR").up()
+              .ele("TaxCurrencyCode").txt("EUR").up()
+              .ele("LanguageName").txt("es").up()
+            .up()
+            .ele("TaxesOutputs")
+              .ele("Tax")
+                .ele("TaxTypeCode").txt("01").up() // IVA
+                .ele("TaxRate").txt("21.00").up()
+                .ele("TaxableBase")
+                  .ele("TotalAmount").txt("100.00").up()
+                .up()
+                .ele("TaxAmount")
+                  .ele("TotalAmount").txt("21.00").up()
+                .up()
+              .up()
+            .up()
+            .ele("InvoiceTotals")
+              .ele("TotalGrossAmount").txt("0.00").up()
+              .ele("TotalGeneralDiscounts").txt("0.00").up()
+              .ele("TotalGeneralSurcharges").txt("0.00").up()
+              .ele("TotalGrossAmountBeforeTaxes").txt("0.00").up()
+              .ele("TotalTaxOutputs").txt("0.00").up()
+              .ele("TotalTaxesWithheld").txt("0.00").up()
+              .ele("InvoiceTotal").txt("0.00").up()
+              .ele("TotalOutstandingAmount").txt("0.00").up()
+              .ele("TotalExecutableAmount").txt("0.00").up()
+            .up()
+            .ele("Items")
+              .ele("InvoiceLine")
+                .ele("ItemDescription").txt("Servicio de consultoría").up()
+                .ele("Quantity").txt("1").up()
+                .ele("UnitPriceWithoutTax").txt("100.00").up()
+                .ele("TotalCost").txt("100.00").up()
+                .ele("GrossAmount").txt("0.00").up()
+                .ele("TaxesOutputs")
+                  .ele("Tax")
+                    .ele("TaxTypeCode").txt("01").up() // IVA
+                    .ele("TaxRate").txt("21.00").up()
+                    .ele("TaxableBase")
+                      .ele("TotalAmount").txt("100.00").up()
+                    .up()
+                    .ele("TaxAmount")
+                      .ele("TotalAmount").txt("21.00").up()
+                    .up()
+                  .up()
+                .up()
+              .up()
+            .up()
+            .ele("PaymentDetails")
+              .ele("Installment")
+                .ele("InstallmentDueDate").txt("2024-02-15").up()
+                .ele("InstallmentAmount").txt("121.00").up()
+                .ele("PaymentMeans").txt("02").up() // Transferencia bancaria
+                .ele("AccountToBeCredited")
+                  .ele("IBAN").txt("ES9121000418450200051332").up()
+                .up()
+              .up()
+            .up()
+          .up()
+        .up()
+      .end({ prettyPrint: true });
+  
+    // Guardar el archivo XML
+    fs.writeFileSync("factura-completa.xml", facturae);
+    console.log("Facturae completa generada correctamente.");
+  }
+
 class PDFText {
     text: string;
     alignment: "left"|"center"|"right";
@@ -261,6 +401,7 @@ class PDFText {
         return new PDFText("");
     }
 }
+
 interface TableOptions {
     borderColor: RGB;
     borderWidth: number;
