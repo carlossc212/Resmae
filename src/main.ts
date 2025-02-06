@@ -2,6 +2,7 @@ import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import { generateInvoice } from './util/DocGenerator';
+import { initializeDatabase, addProduct } from './database';
 
 if (started) {
   app.quit();
@@ -16,14 +17,15 @@ const createWindow = () => {
     height: 600,
     x: primaryDisplay.bounds.x + (width - 800) / 2,
     y: primaryDisplay.bounds.y + (height - 600) / 2,
-    
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       devTools: false,
-      nodeIntegration: false,
+      nodeIntegration: false
     },
   });
   
+  initializeDatabase(mainWindow);
+
   mainWindow.menuBarVisible = false;
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);     
@@ -32,6 +34,10 @@ const createWindow = () => {
   }
 
   ipcMain.handle('generate-invoice', async (_, filename)=>{generateInvoice(filename)});
+
+  ipcMain.handle('add-product', (_, product) => {
+    addProduct(product.name, product.description, product.price);
+  });
 };
 
 app.on('ready', createWindow);

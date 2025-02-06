@@ -408,7 +408,7 @@ body.dark .home .text, .home .title {
   display: block;
 }
 
-.add-product-btn {
+.add-product-button {
   background-color: #4CAF50;
   color: white;
   border: none;
@@ -424,7 +424,7 @@ body.dark .home .text, .home .title {
   left: 18px;
 }
 
-.add-product-btn:hover {
+.add-product-button:hover {
   background-color: #45a049;
 }
 

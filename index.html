@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <script type="module" src="/src/renderer.ts"></script>
   <nav class="sidebar close">
     <header>
       <div class="image-text">
@@ -19,7 +20,6 @@
       <div class="toggle">
         <img src="/src/icons/bx-chevron-right.svg">
       </div>
-      
     </header>
 
     <div class="menu-bar">
@@ -55,7 +55,6 @@
               </a>
             </li>
           </ul>
-          
         </ul>
       </div>
 
@@ -75,21 +74,22 @@
     </div>
   </nav>
 
-  <!-- Contenido Principal con Vistas Dinámicas -->
   <section class="home">
+
     <div id="home" class="view active">
       <h2 class="title">Inicio</h2>
       <p class="text">Bienvenido al panel de control.</p>
     </div>
+
     <div id="invoices" class="view">
       <h2>Facturas</h2>
       <p>Información de facturas.</p>
     </div>
+
     <div id="products" class="view">
       <h2 class="title spacing"><span>Productos</span>
         <div>
-          <button class="add-product-btn">Añadir</button>
-          <button class="add-product-btn">Añadir</button>
+          <button class="add-product-button">Añadir</button>
         </div>
         </h2>
       <table class="products-table">
@@ -114,7 +114,6 @@
             <td>Descripción del Producto 2</td>
             <td>€20.00</td>
           </tr>
-          <!-- Agrega más filas de productos aquí -->
         </tbody>
       </table>
     </div>
@@ -125,6 +124,5 @@
     </div>
   </section>
 
-  <script type="module" src="/src/renderer.ts"></script>
 </body>
 </html>
