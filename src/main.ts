@@ -18,9 +18,12 @@ const createWindow = () => {
     x: primaryDisplay.bounds.x + (width - 800) / 2,
     y: primaryDisplay.bounds.y + (height - 600) / 2,
     webPreferences: {
+      webSecurity: true, // Bloquea la carga de scripts externos
+      allowRunningInsecureContent: false, // Evita contenido inseguro
+      nodeIntegration: false, // Deshabilita acceso a Node.js en el renderer
+      contextIsolation: true, // Asegura que el contexto del renderer esté aislado
       preload: path.join(__dirname, 'preload.js'),
       devTools: false,
-      nodeIntegration: false
     },
   });
   
@@ -39,6 +42,12 @@ const createWindow = () => {
     addProduct(product.name, product.description, product.price);
   });
 };
+
+// No necesita ejecutarse al iniciar el sistema, evita que se autoagregue.
+app.setLoginItemSettings({
+  openAtLogin: false,
+  openAsHidden: false
+});
 
 app.on('ready', createWindow);
 
