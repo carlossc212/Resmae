@@ -16,6 +16,10 @@ const body = document.querySelector("body"),
   navLinks = document.querySelectorAll(".nav-link a"),
   addProductButton = body.querySelector(".add-product-button");
 
+  document.addEventListener("dragstart", (event) => {
+    event.preventDefault(); // Bloquea el arrastre de imágenes y otros elementos
+  });  
+
 exitButton.addEventListener("click", () => {
     window.close();
 });
@@ -62,6 +66,5 @@ window.electronAPI.onaddproduct((_, error) => {
 });
 
 addProductButton.addEventListener("click", () => {
-  
   window.electronAPI.addProduct("Pan", "Harina de trigo", 0.99)
 });
