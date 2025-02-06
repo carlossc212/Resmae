@@ -41,6 +41,7 @@
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1",
     "pdf-lib": "^1.17.1",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "xmlbuilder2": "^3.1.1"
   }
 }
