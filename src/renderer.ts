@@ -13,7 +13,8 @@ const body = document.querySelector("body"),
   modeSwitch = body.querySelector(".toggle-switch"),
   modeText = body.querySelector(".mode-text") as HTMLElement,
   views = document.querySelectorAll(".view"),
-  navLinks = document.querySelectorAll(".nav-link a");
+  navLinks = document.querySelectorAll(".nav-link a"),
+  addProductButton = body.querySelector(".add-product-button");
 
 exitButton.addEventListener("click", () => {
     window.close();
@@ -50,4 +51,17 @@ navLinks.forEach(link => {
         // Mostrar solo la vista seleccionada
         document.getElementById(targetId!)?.classList.add("active");
     });
+});
+
+window.electronAPI.onaddproduct((_, error) => {
+  if (error) {
+    alert("Ha ocurrido un error al agregar el producto");
+  } else {
+    alert("Producto agregado correctamente");
+  }
+});
+
+addProductButton.addEventListener("click", () => {
+  
+  window.electronAPI.addProduct("Pan", "Harina de trigo", 0.99)
 });
