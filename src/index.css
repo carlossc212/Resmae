@@ -413,7 +413,7 @@ body.dark .home .text, .home .title {
   background-color: #4CAF50;
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 8px 14px;
   font-size: 14px;
   cursor: pointer;
   border-radius: 5px;
@@ -479,4 +479,126 @@ body.dark .products-table td {
 body.dark .products-table tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.08);
   transition: background-color 0.5s ease;
+}
+
+#productDialog {
+  position: fixed; /* Lo posiciona respecto a la ventana */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centra el diálogo */
+  border: none;
+  border-radius: 8px;
+  padding: 20px;
+  width: 320px;
+  background-color: var(--sidebar-color); /* O el color que prefieras */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el formulario interno */
+#productDialog form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Título del dialog */
+#productDialog h3 {
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: var(--text-color);
+  text-align: center;
+}
+
+/* Etiquetas del formulario */
+#productDialog label {
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* Inputs del formulario */
+#productDialog input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #333;
+}
+
+/* Ajuste para el menú de botones */
+#productDialog menu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Botones del dialog */
+#productDialog button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+/* Botón de aceptar (submit) */
+#productDialog button[type="submit"] {
+  background-color: #45a049;
+  color: #fff;
+}
+
+/* Botón de cancelar (reset) */
+#productDialog button[type="reset"] {
+  background-color: #ccc;
+  color: #333;
+}
+
+/* Opcional: hover para botones */
+#productDialog button:hover {
+  opacity: 0.9;
+}
+
+body.dark #productDialog h3,
+body.dark #productDialog label {
+  /* Se usa la variable --text-color para que cambie en modo oscuro */
+  color: var(--text-color);
+}
+
+body.dark #productDialog input {
+  background-color: #333;            /* Fondo oscuro para los inputs */
+  color: var(--text-color);           /* Texto claro */
+  border: 1px solid #444;             /* Borde oscuro */
+}
+
+/* Botón de aceptar puede mantenerse igual o ajustarse si se desea */
+body.dark #productDialog button[type="submit"] {
+  /* Si prefieres, puedes cambiar el color del botón en modo oscuro */
+  background-color: #45a049;
+  color: #fff;
+}
+
+/* Botón de cancelar en modo oscuro */
+body.dark #productDialog button[type="reset"] {
+  background-color: #444;            /* Fondo oscuro */
+  color: var(--text-color);           /* Texto claro */
+}
+
+/* Personaliza el focus en los inputs del diálogo */
+/* Define un borde de 1px transparente para inputs y botones dentro del diálogo */
+body.dark #productDialog input, body.dark #productDialog button {
+  border: 1px solid transparent;
+  box-sizing: border-box; /* Asegura que el borde se incluya en el tamaño total */
+}
+
+/* Estilo de focus que cambia el color del borde y añade un box-shadow */
+body.dark #productDialog input:focus, body.dark #productDialog button:focus {
+  border-color: #fff;
+  box-shadow: 0 0 5px 1px #fff;
+  outline: none; /* Opcional, para eliminar el outline predeterminado */
 }

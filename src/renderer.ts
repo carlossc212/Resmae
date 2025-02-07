@@ -14,10 +14,52 @@ const body = document.querySelector("body"),
   modeText = body.querySelector(".mode-text") as HTMLElement,
   views = document.querySelectorAll(".view"),
   navLinks = document.querySelectorAll(".nav-link a"),
-  addProductButton = body.querySelector(".add-product-button");
+
+  // Selecciona el botón que abre el diálogo y el diálogo mismo
+addProductButton = document.querySelector(".add-product-button"),
+productDialog = document.getElementById("productDialog") as HTMLDialogElement,
+productForm = document.getElementById("productForm") as HTMLFormElement,
+
+// Referencias a los campos del formulario
+productNameInput = document.getElementById("productName") as HTMLInputElement,
+productDescriptionInput = document.getElementById("productDescription") as HTMLInputElement,
+productPriceInput = document.getElementById("productPrice") as HTMLInputElement;
 
 document.addEventListener("dragstart", (event) => {
   event.preventDefault(); // Bloquea el arrastre de imágenes y otros elementos
+});
+
+exitButton.addEventListener("click", () => {
+  window.close();
+});
+
+toggle.addEventListener("click", () => {
+sidebar.classList.toggle("close");
+});
+
+modeSwitch.addEventListener("click", () => {
+body.classList.toggle("dark");
+
+if (body.classList.contains("dark")) {
+  modeText.innerText = "Modo oscuro";
+} else {
+  modeText.innerText = "Modo claro";
+}
+});
+
+navLinks.forEach(link => {
+  link.addEventListener("click", (event) => {
+      event.preventDefault(); // Evita recargar la página
+
+      // Obtener el ID de la vista desde el href del enlace
+      const targetId = link.getAttribute("href").replace("#", "");
+
+      // Ocultar todas las vistas
+      views.forEach(view => view.classList.remove("active"));
+
+      // Mostrar solo la vista seleccionada
+      document.getElementById(targetId).classList.add("active");
+  });
 });
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -59,52 +101,34 @@ async function updateProductsTable() {
   }
 }
 
-exitButton.addEventListener("click", () => {
-    window.close();
-});
-
-toggle.addEventListener("click", () => {
-  sidebar.classList.toggle("close");
-});
-
 searchBtn.addEventListener("click", () => {
   sidebar.classList.remove("close");
 });
 
-modeSwitch.addEventListener("click", () => {
-  body.classList.toggle("dark");
+// Cuando se haga click en el botón, se abre el diálogo
+addProductButton?.addEventListener("click", () => {
+  productDialog.showModal();
+});
 
-  if (body.classList.contains("dark")) {
-    modeText.innerText = "Modo oscuro";
-  } else {
-    modeText.innerText = "Modo claro";
+// Manejar el evento "reset" para cerrar el diálogo al cancelar
+productForm.addEventListener("reset", (event) => {
+  productDialog.close();
+});
+
+// Maneja el envío del formulario
+productForm.addEventListener("submit", async (event) => {
+  // Obtén y valida los valores
+  const name = productNameInput.value.trim();
+  const description = productDescriptionInput.value.trim();
+  const price = parseFloat(productPriceInput.value);
+
+  try {
+    // Llama a la función addProduct a través de electronAPI
+    await window.electronAPI.addProduct(name, description, price);
+    await updateProductsTable();
+    productForm.reset();
+    productDialog.close();
+  } catch (error) {
+    alert("Error al agregar el producto. Revisa la consola para más detalles.");
   }
-});
-
-navLinks.forEach(link => {
-    link.addEventListener("click", (event) => {
-        event.preventDefault(); // Evita recargar la página
-
-        // Obtener el ID de la vista desde el href del enlace
-        const targetId = link.getAttribute("href").replace("#", "");
-
-        // Ocultar todas las vistas
-        views.forEach(view => view.classList.remove("active"));
-
-        // Mostrar solo la vista seleccionada
-        document.getElementById(targetId).classList.add("active");
-    });
-});
-
-window.electronAPI.onaddproduct((_, error) => {
-  if (error) {
-    alert("Ha ocurrido un error al agregar el producto");
-  } else {
-    alert("Producto agregado correctamente");
-    updateProductsTable();
-  }
-});
-
-addProductButton.addEventListener("click", () => {
-  window.electronAPI.addProduct("Pan", "Harina de trigo", 0.99)
 });

@@ -38,8 +38,8 @@ const createWindow = () => {
 
   ipcMain.handle('generate-invoice', async (_, filename)=>{generateInvoice(filename)});
 
-  ipcMain.handle('add-product', (_, product) => {
-    addProduct(product.name, product.description, product.price);
+  ipcMain.handle('add-product', async (_, product) => {
+    return addProduct(product.name, product.description, product.price);
   });
 
   ipcMain.handle('get-products', async () => {

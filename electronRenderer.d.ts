@@ -6,7 +6,6 @@ declare global {
     electronAPI: {
         generateInvoice: (filename:string) => Promise<void>;
         addProduct: (name: string, description: string, price: number) => Promise<void>;
-        onaddproduct: (callback: (event, error: Error | null) => void) => void;
         getProducts: () => Promise<{id: number, name: string, description: string, price: number}[]>;
     }
   }

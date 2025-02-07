@@ -14,14 +14,18 @@ export function initializeDatabase(mainWindow: Electron.BrowserWindow) {
     console.log('Base de datos inicializada y tabla de productos creada si no existia');
 }
 
-export function addProduct(name: string, description: string, price: number) {
-    let error: Error | null = null;
+export function addProduct(name: string, description: string, price: number): Promise<void> {
+  return new Promise((resolve, reject) => {
     db.run(`INSERT INTO products (name, description, price) VALUES (?, ?, ?)`, [name, description, price], (err) => {
         if (err) {
-            error = err;
+          console.error("Error al agregar el producto:", err);
+          reject(err);
+        } else {
+          resolve();
         }
-        renderedWindow.webContents.send('product-added', error);
-    });
+      }
+    );
+  });
 }
 
 export function getProducts(): Promise<{ id: number; name: string; description: string; price: number }[]> {

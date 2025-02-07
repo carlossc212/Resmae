@@ -129,5 +129,24 @@
     </div>
   </section>
 
+  <dialog id="productDialog">
+    <form method="dialog" id="productForm">
+      <h3>Agregar nuevo producto</h3>
+      <label for="productName">Nombre:</label>
+      <input type="text" id="productName" name="productName" required autofocus>
+  
+      <label for="productDescription">Descripción:</label>
+      <input type="text" id="productDescription" name="productDescription" required>
+  
+      <label for="productPrice">Precio:</label>
+      <input type="number" id="productPrice" name="productPrice" required step="0.01">
+  
+      <menu>
+        <button type="reset">Cancelar</button>
+        <button type="submit">Aceptar</button>
+      </menu>
+    </form>
+  </dialog>
+  
 </body>
 </html>
