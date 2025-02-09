@@ -23,8 +23,11 @@
     "@electron/fuses": "^1.8.0",
     "@types/better-sqlite3": "^7.6.12",
     "@types/electron-squirrel-startup": "^1.0.2",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "electron": "34.0.1",
     "eslint": "^8.57.1",
     "eslint-plugin-import": "^2.31.0",
@@ -41,6 +44,8 @@
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1",
     "pdf-lib": "^1.17.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "sqlite3": "^5.1.7",
     "xmlbuilder2": "^3.1.1"
   }
