@@ -77,7 +77,7 @@ const Sidebar = ({ onViewChanged }: Props) => {
               <i className="icon sun-icon sun"></i>
               <i className="icon moon-icon moon"></i>
             </div>
-            <span className="mode-text text">Modo claro</span>
+            <span className="mode-text text">Modo {darkMode ? "oscuro":"claro"}</span>
             <div className="toggle-switch" onClick={()=>setDarkMode(!darkMode)}>
               <span className="switch"></span>
             </div>
