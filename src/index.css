@@ -60,6 +60,8 @@ body.dark {
 }
 
 .sidebar {
+  display: flex;
+  flex-flow: column nowrap;
   position: fixed;
   top: 0;
   left: 0;
@@ -363,10 +365,6 @@ body.dark .home .text, .home .title {
   mask-repeat: no-repeat;
   mask-position: center;
   transition: var(--tran-03);
-}
-
-.chevron-right-icon {
-  mask-image: url("/src/icons/bx-chevron-right.svg");
 }
 
 .search-icon {
@@ -712,29 +710,41 @@ body.dark #deleteProductDialog button:focus {
   outline: none;
 }
 
-.edit-button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  margin-right: 5px;
+.actionIcon {
+  display: inline-flex; /* Asegura una alineación más precisa */
+  align-items: center; /* Centra el contenido verticalmente */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  vertical-align: middle; /* Asegura alineación con el texto en la misma fila */
+  width: 1.8em; /* Tamaño más pequeño */
+  aspect-ratio: 1 / 1;
+  background-color: var(--text-color);
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  transition: background-color 0.3s ease;
   cursor: pointer;
-  border-radius: 4px;
+  margin-right: 15px; /* Espaciado entre los botones */
 }
 
-.delete-button {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 4px;
+/* Evita margen en el último botón */
+.actionIcon:last-child {
+  margin-right: 0;
 }
 
-.edit-button:hover {
-  background-color: #45a049;
+/* Icono de editar */
+.actionIcon.edit {
+  mask-image: url("/src/icons/bx-pencil.svg");
 }
 
-.delete-button:hover {
-  background-color: #d32f2f;
+/* Icono de eliminar */
+.actionIcon.delete {
+  mask-image: url("/src/icons/bx-trash.svg");
+}
+
+.actionIcon.edit:hover {
+  background-color: orange;
+}
+
+.actionIcon.delete:hover {
+  background-color: red;
 }

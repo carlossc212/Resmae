@@ -70,20 +70,18 @@ const Products = ({ className }: Props) => {
                 <td>{product.description}</td>
                 <td>€{product.price.toFixed(2)}</td>
                 <td>
-                  <button className="edit-button">✏️</button>
+                  <button className="actionIcon edit">
+                  </button>
                   <button
-                    className="delete-button"
+                    className="actionIcon delete"
                     onClick={() => {
                       setCurrentProduct(product);
                       deleteProductDialogRef.current?.showModal();
-                      const submitDeleteBurron = deleteProductDialogRef.current?.querySelector(
+                      const submitDeleteButton = deleteProductDialogRef.current?.querySelector(
                         "button[type='submit']"
                       ) as HTMLButtonElement;
-                      if (submitDeleteBurron) submitDeleteBurron.focus();
-                      
-                    }}
-                  >
-                    🗑️
+                      if (submitDeleteButton) submitDeleteButton.focus();
+                    }}>
                   </button>
                 </td>
               </tr>
