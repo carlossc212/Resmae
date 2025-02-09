@@ -9,16 +9,17 @@ interface Props {
 }
 
 const Home = ({ active }: Props) => {
+  const views: Record<string, React.JSX.Element> = {
+    dashboard: <Dashboard className="active" />,
+    invoices: <Invoices className="active" />,
+    products: <Products className="active" />,
+    settings: <Settings className="active" />
+  };
+  
   return (
     <>
       <section className="home">
-        <Dashboard className={active === "dashboard" ? "active" : ""} />
-
-        <Invoices className={active === "invoices" ? "active" : ""} />
-
-        <Products className={active === "products" ? "active" : ""} />
-
-        <Settings className={active === "settings" ? "active" : ""} />
+        {views[active]}
       </section>
     </>
   );
