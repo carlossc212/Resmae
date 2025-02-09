@@ -88,11 +88,42 @@ async function updateProductsTable() {
       
       const tdPrice = document.createElement('td');
       tdPrice.innerText = `€${product.price.toFixed(2)}`;
+
+      // Crear celda para botones
+      const tdActions = document.createElement('td');
+      
+      // Botón Editar
+      const editButton = document.createElement('button');
+      editButton.innerText = "✏️";
+      editButton.classList.add("edit-button");
+      editButton.addEventListener("click", () => editProduct(product));
+
+      // Botón Eliminar
+      const deleteButton = document.createElement('button');
+      deleteButton.innerText = "🗑️";
+      deleteButton.classList.add("delete-button");
+      deleteButton.addEventListener("click", async () => {
+        if (confirm(`¿Seguro que quieres eliminar "${product.name}"?`)) { // Al igual que los alerts, el confirm tambien bloquea el añadir un producto
+                                                                          // una solucion temporal seria minimizar y volver a maximizar la ventana, se 
+                                                                          // deberia de incluir otro dialog personalizado y probar
+          try {
+            await window.electronAPI.deleteProduct(product.id);
+            await updateProductsTable();
+          } catch (error) {
+            alert("Error al eliminar el producto");
+            console.error(error);
+          }
+        }
+      });
+
+      tdActions.appendChild(editButton);
+      tdActions.appendChild(deleteButton);
       
       tr.appendChild(tdId);
       tr.appendChild(tdName);
       tr.appendChild(tdDesc);
       tr.appendChild(tdPrice);
+      tr.appendChild(tdActions);
       
       tbody.appendChild(tr);
     });

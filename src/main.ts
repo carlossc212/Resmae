@@ -2,7 +2,7 @@ import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import { generateInvoice } from './util/DocGenerator';
-import { db, initializeDatabase, addProduct, getProducts } from './database';
+import { db, initializeDatabase, addProduct, getProducts, deleteProduct } from './database';
 
 if (started) {
   app.quit();
@@ -49,6 +49,10 @@ const createWindow = () => {
     } catch (error) {
       throw error;
     }
+  });
+
+  ipcMain.handle('delete-product', async (_, id) => {
+    return deleteProduct(id);
   });
 };
 

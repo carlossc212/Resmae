@@ -456,11 +456,19 @@ h2.title span {
 .products-table th {
   background-color: var(--container-color);
   font-weight: bold;
+  border-bottom: 1px solid #bbb;
 }
 
 .products-table tbody tr:hover {
   background-color: #f9f9f9;
   transition: background-color 0.5s ease;
+}
+
+.products-table th:last-child,
+.products-table td:last-child {
+  text-align: right; /* Alinea el contenido a la derecha */
+  padding-right: 0px; /* Añade un pequeño margen */
+  white-space: nowrap; /* Evita que los botones se partan en varias líneas */
 }
 
 body.dark .products-table {
@@ -473,7 +481,7 @@ body.dark .products-table th {
 }
 
 body.dark .products-table td {
-  border-bottom: 1px solid var(--border-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 body.dark .products-table tbody tr:hover {
@@ -601,4 +609,31 @@ body.dark #productDialog input:focus, body.dark #productDialog button:focus {
   border-color: #fff;
   box-shadow: 0 0 5px 1px #fff;
   outline: none; /* Opcional, para eliminar el outline predeterminado */
+}
+
+.edit-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.edit-button:hover {
+  background-color: #45a049;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
 }
