@@ -33,7 +33,6 @@
   --toggle-color: #ddd;
   --text-color: #707070;
 
-  --tran-03: all 0.2s ease;
   --tran-03: all 0.3s ease;
   --tran-04: all 0.3s ease;
   --tran-05: all 0.3s ease;
@@ -101,6 +100,7 @@ body.dark {
   font-size: 20px;
   color: var(--text-color);
   transition: var(--tran-03);
+  transition: color 0.3s ease;
 }
 
 .sidebar .text {
@@ -214,29 +214,33 @@ header .image-text .profession {
   transition: var(--tran-03);
 }
 
-.sidebar li a:hover, .exit-button:hover {
+.sidebar li a:hover,
+.sidebar li a:focus {
   background-color: var(--primary-color);
+  outline: none;
 }
 
 .sidebar li a:hover .icon,
 .sidebar li a:hover .text,
-.exit-button:hover .icon,
-.exit-button:hover .text {
+.sidebar li a:focus .icon,
+.sidebar li a:focus .text {
   color: var(--sidebar-color);
 }
 
 body.dark .sidebar li a:hover .icon,
 body.dark .sidebar li a:hover .text,
-body.dark .exit-button:hover .icon,
-body.dark .exit-button:hover .text {
+body.dark .sidebar li a:focus .icon,
+body.dark .sidebar li a:focus .text {
   color: var(--text-color);
 }
 
-.nav-link a:hover .icon, .exit-button:hover .icon {
+.nav-link a:hover .icon,
+.nav-link a:focus .icon  {
   background-color: var(--sidebar-color);
 }
 
-body.dark .nav-link a:hover .icon, .exit-button:hover .icon {
+body.dark .nav-link a:hover .icon,
+body.dark .nav-link a:focus .icon {
   background-color: #e4e9f7;
 }
 
@@ -410,7 +414,7 @@ body.dark .home .text, .home .title {
 .add-product-button {
   background-color: #4CAF50;
   color: white;
-  border: none;
+  border: 1px solid transparent; /* Borde inicial transparente */
   padding: 8px 14px;
   font-size: 14px;
   cursor: pointer;
@@ -421,11 +425,31 @@ body.dark .home .text, .home .title {
   position: relative;
   top: -5px;
   left: 18px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .add-product-button:hover {
   background-color: #45a049;
 }
+
+/* Estilo de focus en modo claro */
+.add-product-button:focus {
+  border-color: #fff;
+  box-shadow: 0 0 5px 1px #fff;
+  outline: none;
+}
+
+/* Estilo de focus en modo oscuro */
+body.dark .add-product-button {
+  border: 1px solid transparent;
+}
+
+body.dark .add-product-button:focus {
+  border-color: #fff;
+  box-shadow: 0 0 5px 1px #fff;
+  outline: none;
+}
+
 
 h2.title span {
   display: inline-block;
@@ -470,15 +494,13 @@ h2.title span {
 }
 
 /* Oculta los botones por defecto */
-.products-table td:last-child .edit-button,
-.products-table td:last-child .delete-button {
+.products-table td:last-child .actionIcon {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 /* Al hacer hover sobre la fila, muestra los botones */
-.products-table tbody tr:hover td:last-child .edit-button,
-.products-table tbody tr:hover td:last-child .delete-button {
+.products-table tbody tr:hover td:last-child .actionIcon {
   opacity: 1;
 }
 
@@ -610,13 +632,15 @@ body.dark #addProductDialog button[type="reset"] {
 
 /* Personaliza el focus en los inputs del diálogo */
 /* Define un borde de 1px transparente para inputs y botones dentro del diálogo */
-body.dark #addProductDialog input, body.dark #addProductDialog button {
+body.dark #addProductDialog input,
+body.dark #addProductDialog button {
   border: 1px solid transparent;
   box-sizing: border-box; /* Asegura que el borde se incluya en el tamaño total */
 }
 
 /* Estilo de focus que cambia el color del borde y añade un box-shadow */
-body.dark #addProductDialog input:focus, body.dark #addProductDialog button:focus {
+body.dark #addProductDialog input:focus,
+body.dark #addProductDialog button:focus {
   border-color: #fff;
   box-shadow: 0 0 5px 1px #fff;
   outline: none; /* Opcional, para eliminar el outline predeterminado */

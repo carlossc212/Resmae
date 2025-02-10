@@ -41,7 +41,6 @@ export function getProducts(): Promise<{ id: number; name: string; description: 
   });
 }
   
-// database.ts
 export function deleteProduct(id: number): Promise<void> {
   return new Promise((resolve, reject) => {
     db.run(`DELETE FROM products WHERE id = ?`, [id], (err) => {
