@@ -32,7 +32,6 @@
   --primary-color-light: #f6f5ff;
   --toggle-color: #ddd;
   --text-color: #707070;
-
   --tran-03: all 0.3s ease;
   --tran-04: all 0.3s ease;
   --tran-05: all 0.3s ease;
@@ -84,15 +83,12 @@ body.dark {
   margin-top: 10px;
 }
 
-.sidebar header .image,
-.sidebar .icon {
+.sidebar .icon, .sidebar header .image {
   min-width: 60px;
   border-radius: 6px;
 }
 
 .sidebar .icon {
-  min-width: 60px;
-  border-radius: 6px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -100,7 +96,6 @@ body.dark {
   font-size: 20px;
   color: var(--text-color);
   transition: var(--tran-03);
-  transition: color 0.3s ease;
 }
 
 .sidebar .text {
@@ -345,12 +340,7 @@ body.dark .switch::before {
 
 .sidebar.close ~ .home {
   left: 78px;
-  height: 100vh;
   width: calc(100% - 78px);
-}
-
-body.dark .home .text, .home .title {
-  color: var(--text-color);
 }
 
 .view {
@@ -371,45 +361,17 @@ body.dark .home .text, .home .title {
   transition: var(--tran-03);
 }
 
-.search-icon {
-  mask-image: url("/src/icons/bx-search.svg");
-}
+.search-icon { mask-image: url("/src/icons/bx-search.svg"); }
+.home-icon { mask-image: url("/src/icons/bx-home-alt.svg"); }
+.invoices-icon { mask-image: url("/src/icons/bx-file.svg"); }
+.products-icon { mask-image: url("/src/icons/bx-data.svg"); }
+.settings-icon { mask-image: url("/src/icons/bx-settings.svg"); }
+.exit-icon { mask-image: url("/src/icons/bx-log-out.svg"); }
+.moon-icon { mask-image: url("/src/icons/bx-moon.svg"); }
+.sun-icon { mask-image: url("/src/icons/bx-sun.svg"); }
 
-.home-icon {
-  mask-image: url("/src/icons/bx-home-alt.svg");
-}
-
-.invoices-icon {
-  mask-image: url("/src/icons/bx-file.svg");
-}
-
-.products-icon {
-  mask-image: url("/src/icons/bx-data.svg");
-}
-
-.settings-icon {
-  mask-image: url("/src/icons/bx-settings.svg");
-}
-
-.exit-icon {
-  mask-image: url("/src/icons/bx-log-out.svg");
-}
-
-.moon-icon {
-  mask-image: url("/src/icons/bx-moon.svg");
-}
-
-.sun-icon {
-  mask-image: url("/src/icons/bx-sun.svg");
-}
-
-.moon-icon, .dark .sun-icon {
-  display: none;
-}
-
-.sun-icon, .dark .moon-icon {
-  display: block;
-}
+.moon-icon, .dark .sun-icon { display: none; }
+.sun-icon, .dark .moon-icon { display: block; }
 
 .add-product-button {
   background-color: #4CAF50;
@@ -434,14 +396,9 @@ body.dark .home .text, .home .title {
 
 /* Estilo de focus en modo claro */
 .add-product-button:focus {
-  border-color: #fff;
-  box-shadow: 0 0 5px 1px #fff;
+  border-color: #45a049;
+  box-shadow: 0 0 5px 1px #45a049;
   outline: none;
-}
-
-/* Estilo de focus en modo oscuro */
-body.dark .add-product-button {
-  border: 1px solid transparent;
 }
 
 body.dark .add-product-button:focus {
@@ -449,7 +406,6 @@ body.dark .add-product-button:focus {
   box-shadow: 0 0 5px 1px #fff;
   outline: none;
 }
-
 
 h2.title span {
   display: inline-block;
@@ -535,8 +491,7 @@ body.dark .products-table tbody tr:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos para el formulario interno */
-#addProductDialog form {
+#addProductDialog form, #deleteProductDialog form {
   display: flex;
   flex-direction: column;
 }
@@ -595,7 +550,8 @@ body.dark .products-table tbody tr:hover {
 }
 
 /* Botón de cancelar (reset) */
-#addProductDialog button[type="reset"] {
+#addProductDialog button[type="reset"],
+#deleteProductDialog button[type="reset"] {
   background-color: #ccc;
   color: #333;
 }
@@ -605,23 +561,10 @@ body.dark .products-table tbody tr:hover {
   opacity: 0.9;
 }
 
-body.dark #addProductDialog h3,
-body.dark #addProductDialog label {
-  /* Se usa la variable --text-color para que cambie en modo oscuro */
-  color: var(--text-color);
-}
-
 body.dark #addProductDialog input {
   background-color: #333;            /* Fondo oscuro para los inputs */
   color: var(--text-color);           /* Texto claro */
   border: 1px solid #444;             /* Borde oscuro */
-}
-
-/* Botón de aceptar puede mantenerse igual o ajustarse si se desea */
-body.dark #addProductDialog button[type="submit"] {
-  /* Si prefieres, puedes cambiar el color del botón en modo oscuro */
-  background-color: #45a049;
-  color: #fff;
 }
 
 /* Botón de cancelar en modo oscuro */
@@ -659,11 +602,6 @@ body.dark #addProductDialog button:focus {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-#deleteProductDialog form {
-  display: flex;
-  flex-direction: column;
-}
-
 #deleteProductDialog h3 {
   margin-bottom: 15px;
   font-size: 22px;
@@ -698,11 +636,6 @@ body.dark #addProductDialog button:focus {
 #deleteProductDialog button[type="submit"] {
   background-color: #f44336;
   color: #fff;
-}
-
-#deleteProductDialog button[type="reset"] {
-  background-color: #ccc;
-  color: #333;
 }
 
 #deleteProductDialog button:hover {
@@ -755,15 +688,8 @@ body.dark #deleteProductDialog button:focus {
   margin-right: 0;
 }
 
-/* Icono de editar */
-.actionIcon.edit {
-  mask-image: url("/src/icons/bx-pencil.svg");
-}
-
-/* Icono de eliminar */
-.actionIcon.delete {
-  mask-image: url("/src/icons/bx-trash.svg");
-}
+.actionIcon.edit { mask-image: url("/src/icons/bx-pencil.svg"); }
+.actionIcon.delete { mask-image: url("/src/icons/bx-trash.svg"); }
 
 .actionIcon.edit:hover {
   background-color: orange;
