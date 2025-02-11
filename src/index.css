@@ -111,6 +111,24 @@ body.dark {
   opacity: 0;
 }
 
+.sidebar.close  .text.nav-text{
+  animation: hide-text 0.3s linear forwards;
+}
+
+@keyframes hide-text{
+  0%{
+    opacity: 1;
+    display: inline-block;
+  }
+  99%{
+    opacity: 0;
+    display: inline-block;
+  }
+  100%{
+    display: none;
+  }
+}
+
 .sidebar header {
   position: relative;
 }
