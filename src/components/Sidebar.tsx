@@ -128,7 +128,9 @@ const Sidebar = ({ onViewChanged }: Props) => {
               <i className="icon moon-icon moon" tabIndex={-1}></i>
             </div>
             <span className="mode-text text" tabIndex={-1}>
-              Modo {darkMode ? "oscuro" : "claro"}
+              {
+                !collapsed ? `Modo ${darkMode ? "oscuro" : "claro"}` : ""
+              }
             </span>
             <div className="toggle-switch">
               <span className="switch" tabIndex={-1}></span>
