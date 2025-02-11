@@ -256,6 +256,7 @@ body.dark .nav-link a:focus .icon {
   background-color: var(--primary-color-light);
   position: relative;
   transition: var(--tran-05);
+  cursor: pointer;
 }
 
 .menu-bar .mode .sun-moon {
@@ -284,7 +285,6 @@ body.dark .nav-link a:focus .icon {
   align-items: center;
   justify-content: center;
   border-radius: 6px;
-  cursor: pointer;
 }
 
 .toggle-switch .switch {
@@ -365,6 +365,7 @@ body.dark .switch::before {
 .home-icon { mask-image: url("/src/icons/bx-home-alt.svg"); }
 .invoices-icon { mask-image: url("/src/icons/bx-file.svg"); }
 .products-icon { mask-image: url("/src/icons/bx-data.svg"); }
+.storage-icon { mask-image: url("/src/icons/bx-package.svg"); }
 .settings-icon { mask-image: url("/src/icons/bx-settings.svg"); }
 .exit-icon { mask-image: url("/src/icons/bx-log-out.svg"); }
 .moon-icon { mask-image: url("/src/icons/bx-moon.svg"); }
@@ -401,10 +402,14 @@ body.dark .switch::before {
   outline: none;
 }
 
-body.dark .add-product-button:focus {
+/* Estilo de focus que cambia el color del borde y añade un box-shadow */
+body.dark .add-product-button:focus,
+body.dark #addProductDialog input:focus,
+body.dark #addProductDialog button:focus,
+body.dark #deleteProductDialog button:focus {
   border-color: #fff;
   box-shadow: 0 0 5px 1px #fff;
-  outline: none;
+  outline: none;  /* Opcional, para eliminar el outline predeterminado */
 }
 
 h2.title span {
@@ -581,14 +586,6 @@ body.dark #addProductDialog button {
   box-sizing: border-box; /* Asegura que el borde se incluya en el tamaño total */
 }
 
-/* Estilo de focus que cambia el color del borde y añade un box-shadow */
-body.dark #addProductDialog input:focus,
-body.dark #addProductDialog button:focus {
-  border-color: #fff;
-  box-shadow: 0 0 5px 1px #fff;
-  outline: none; /* Opcional, para eliminar el outline predeterminado */
-}
-
 #deleteProductDialog {
   position: fixed;
   top: 50%;
@@ -659,12 +656,6 @@ body.dark #deleteProductDialog button[type="submit"] {
 body.dark #deleteProductDialog button[type="reset"] {
   background-color: #444;
   color: var(--text-color);
-}
-
-body.dark #deleteProductDialog button:focus {
-  border-color: #fff;
-  box-shadow: 0 0 5px 1px #fff;
-  outline: none;
 }
 
 .actionIcon {

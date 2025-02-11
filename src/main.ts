@@ -13,10 +13,10 @@ const createWindow = () => {
   const { width, height } = primaryDisplay.workAreaSize;
 
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    x: primaryDisplay.bounds.x + (width - 800) / 2,
-    y: primaryDisplay.bounds.y + (height - 600) / 2,
+    width: 1000,
+    height: 700,
+    x: primaryDisplay.bounds.x + (width - 1000) / 2,
+    y: primaryDisplay.bounds.y + (height - 700) / 2,
     webPreferences: {
       webSecurity: true, // Bloquea la carga de scripts externos
       allowRunningInsecureContent: false, // Evita contenido inseguro

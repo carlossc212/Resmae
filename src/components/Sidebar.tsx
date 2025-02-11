@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 interface Props {
-  onViewChanged: (view: "dashboard" | "invoices" | "products" | "settings") => void;
+  onViewChanged: (view: "dashboard" | "invoices" | "products" | "storage" | "settings") => void;
 }
 
 const Sidebar = ({ onViewChanged }: Props) => {
@@ -78,6 +78,16 @@ const Sidebar = ({ onViewChanged }: Props) => {
             </li>
             <li className="nav-link">
               <a
+                href="#storage"
+                tabIndex={0}
+                onClick={() => onViewChanged("storage")}
+              >
+                <div className="icon storage-icon"></div>
+                <span className="text nav-text">Almacén</span>
+              </a>
+            </li>
+            <li className="nav-link">
+              <a
                 href="#settings"
                 tabIndex={0}
                 onClick={() => onViewChanged("settings")}
@@ -107,10 +117,11 @@ const Sidebar = ({ onViewChanged }: Props) => {
           <li className="mode" 
               tabIndex={0}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
+                if (e.key === "Enter" || e.key === " ") {
                   setDarkMode(!darkMode);
                 }
               }}
+              onClick={() => setDarkMode(!darkMode)}
               >
             <div className="sun-moon" tabIndex={-1}>
               <i className="icon sun-icon sun" tabIndex={-1}></i>
@@ -119,9 +130,7 @@ const Sidebar = ({ onViewChanged }: Props) => {
             <span className="mode-text text" tabIndex={-1}>
               Modo {darkMode ? "oscuro" : "claro"}
             </span>
-            <div
-              className="toggle-switch"
-              onClick={() => setDarkMode(!darkMode)}>
+            <div className="toggle-switch">
               <span className="switch" tabIndex={-1}></span>
             </div>
           </li>

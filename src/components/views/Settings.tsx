@@ -9,7 +9,7 @@ const Settings = ({ className }: Props) => {
     <>
       <div id="settings" className={`view ${className}`}>
         <h2 className="title">
-          <span>Productos</span>
+          <span>Configuración</span>
         </h2>
         <p className="text">Ajustes de la aplicación.</p>
       </div>
