@@ -2,7 +2,7 @@ import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import { generateInvoice } from './util/DocGenerator';
-import { db, initializeDatabase, addProduct, getProducts, deleteProduct } from './database';
+import { db, initializeDatabase, addProduct, getProducts, deleteProduct, getStorageItems, addAmountToStorage } from './database';
 
 if (started) {
   app.quit();
@@ -53,6 +53,19 @@ const createWindow = () => {
 
   ipcMain.handle('delete-product', async (_, id) => {
     return deleteProduct(id);
+  });
+
+  ipcMain.handle('get-storage-items', async () => {
+    try {
+      const storageItems = await getStorageItems();
+      return storageItems;
+    } catch (error) {
+      throw error;
+    }
+  });
+  
+  ipcMain.handle('add-amount-to-storage', async (_, { productId, amount }) => {
+    return addAmountToStorage(productId, amount);
   });
 };
 

@@ -422,7 +422,7 @@ h2.title span {
   width: 100%;
 }
 
-.products-table {
+.products-table, .storage-table {
   width: calc(100% - 60px);
   border-collapse: collapse;
   margin: 0 40px;
@@ -430,55 +430,57 @@ h2.title span {
 }
 
 .products-table th,
-.products-table td {
+.products-table td,
+.storage-table th,
+.storage-table td {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
 
-.products-table th {
+.products-table th, .storage-table th {
   background-color: var(--container-color);
   font-weight: bold;
   border-bottom: 1px solid #bbb;
 }
 
-.products-table tbody tr:hover {
+.products-table tbody tr:hover, .storage-table tbody tr:hover {
   background-color: #f9f9f9;
   transition: background-color 0.5s ease;
 }
 
 .products-table th:last-child,
-.products-table td:last-child {
+.products-table td:last-child, .storage-table th:last-child, .storage-table td:last-child {
   text-align: right; /* Alinea el contenido a la derecha */
   padding-right: 10px; /* Añade un pequeño margen */
   white-space: nowrap; /* Evita que los botones se partan en varias líneas */
 }
 
 /* Oculta los botones por defecto */
-.products-table td:last-child .actionIcon {
+.products-table td:last-child .actionIcon, .storage-table td:last-child .actionIcon {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 /* Al hacer hover sobre la fila, muestra los botones */
-.products-table tbody tr:hover td:last-child .actionIcon {
+.products-table tbody tr:hover td:last-child .actionIcon, .storage-table tbody tr:hover td:last-child .actionIcon {
   opacity: 1;
 }
 
-body.dark .products-table {
+body.dark .products-table, body.dark .storage-table {
   background-color: var(--container-color);
   color: var(--text-color);
 }
 
-body.dark .products-table th {
+body.dark .products-table th, body.dark .storage-table th {
   background-color: var(--container-dark);
 }
 
-body.dark .products-table td {
+body.dark .products-table td, body.dark .storage-table td {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-body.dark .products-table tbody tr:hover {
+body.dark .products-table tbody tr:hover, body.dark .storage-table tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.08);
   transition: background-color 0.5s ease;
 }

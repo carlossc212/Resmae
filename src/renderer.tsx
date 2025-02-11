@@ -12,4 +12,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 document.addEventListener("dragstart", (event) => {
   event.preventDefault(); // Bloquea el arrastre de imágenes y otros elementos
 });
-
