@@ -9,6 +9,7 @@ declare global {
         deleteProduct: (id: number) => Promise<void>;
         getStorageItems: () => Promise<StorageItem[]>;
         addAmountToStorage: (productId: number, amount: number) => Promise<void>;
+        onExitRequest: (callback: () => void) => void;
     }
   }
 }

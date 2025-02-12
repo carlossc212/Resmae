@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 interface Props {
   onViewChanged: (view: "dashboard" | "invoices" | "products" | "storage" | "settings") => void;
@@ -7,9 +7,13 @@ interface Props {
 const Sidebar = ({ onViewChanged }: Props) => {
   const [collapsed, setCollapsed] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const exitDialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     document.body.classList.toggle("dark", darkMode);
+    window.electronAPI.onExitRequest(() => {
+      exitDialogRef.current?.showModal();
+    });
   }, [darkMode]);
 
   return (
@@ -102,7 +106,7 @@ const Sidebar = ({ onViewChanged }: Props) => {
         <div className="bottom-content" tabIndex={-1}>
           <li className="exit-button nav-link">
             <a
-              onClick={() => window.close()}
+              onClick={() => exitDialogRef.current?.showModal()}
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
@@ -114,6 +118,7 @@ const Sidebar = ({ onViewChanged }: Props) => {
               <span className="text nav-text">Salir</span>
             </a>
           </li>
+          
           <li className="mode" 
               tabIndex={0}
               onKeyDown={(e) => {
@@ -138,6 +143,22 @@ const Sidebar = ({ onViewChanged }: Props) => {
           </li>
         </div>
       </div>
+
+      <dialog id="exitDialog" ref={exitDialogRef}>
+        <form method="dialog" id="exitForm" onSubmit={(event) => {
+            window.close();
+          }}>
+          <h3>Salir</h3>
+          <p>¿Estás seguro?</p>
+          <menu>
+            <button type="reset" onClick={()=>exitDialogRef.current?.close()}>Cancelar</button>
+            <button type="submit">
+              Salir
+            </button>
+          </menu>
+        </form>
+      </dialog>
+
     </nav>
   );
 };

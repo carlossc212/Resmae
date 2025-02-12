@@ -27,6 +27,11 @@ const createWindow = () => {
     },
   });
   
+  mainWindow.on("close", (event) => {
+    event.preventDefault(); // Evita el cierre inmediato
+    mainWindow.webContents.send("show-exit-dialog"); // Envía evento al renderer
+  });
+
   initializeDatabase(mainWindow);
 
   mainWindow.menuBarVisible = false;

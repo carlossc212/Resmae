@@ -35,7 +35,7 @@ const Storage = ({ className }: Props) => {
             <tr>
               <th>ID</th>
               <th>Nombre</th>
-              <th>Cantidad Total</th>
+              <th>Cantidad total</th>
               <th></th>
             </tr>
           </thead>
