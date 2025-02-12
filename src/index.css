@@ -107,7 +107,7 @@ body.dark {
   transition: var(--tran-03);
 }
 
-.sidebar.close .text {
+.sidebar.close .text, .mode .sun-moon i.moon, body.dark .mode .sun-moon i.sun {
   opacity: 0;
 }
 
@@ -286,14 +286,6 @@ body.dark .nav-link a:focus .icon {
   position: absolute;
 }
 
-.mode .sun-moon i.moon, body.dark .mode .sun-moon i.sun {
-  opacity: 0;
-}
-
-.mode .sun-moon i.sun, body.dark .mode .sun-moon i.moon {
-  opacity: 1;
-}
-
 .menu-bar .bottom-content .toggle-switch {
   position: absolute;
   right: 0;
@@ -395,8 +387,8 @@ body.dark .switch::before {
 .add-product-button {
   background-color: #4CAF50;
   color: white;
-  border: 1px solid transparent; /* Borde inicial transparente */
-  padding: 8px 14px;
+  border: none;
+  padding: 6px 12px;
   font-size: 14px;
   cursor: pointer;
   border-radius: 5px;
@@ -409,12 +401,11 @@ body.dark .switch::before {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.add-product-button:hover {
+.add-product-button:hover, #addProductDialog button[type="submit"]:hover {
   background-color: #45a049;
 }
 
-/* Estilo de focus en modo claro */
-.add-product-button:focus {
+.add-product-button:focus, #addProductDialog button[type="submit"]:focus {
   border-color: #45a049;
   box-shadow: 0 0 5px 1px #45a049;
   outline: none;
@@ -427,7 +418,7 @@ body.dark #addProductDialog button:focus,
 body.dark #deleteProductDialog button:focus {
   border-color: #fff;
   box-shadow: 0 0 5px 1px #fff;
-  outline: none;  /* Opcional, para eliminar el outline predeterminado */
+  outline: none;
 }
 
 h2.title span {
@@ -468,20 +459,25 @@ h2.title span {
 }
 
 .products-table th:last-child,
-.products-table td:last-child, .storage-table th:last-child, .storage-table td:last-child {
+.products-table td:last-child,
+.storage-table th:last-child,
+.storage-table td:last-child {
   text-align: right; /* Alinea el contenido a la derecha */
   padding-right: 10px; /* Añade un pequeño margen */
   white-space: nowrap; /* Evita que los botones se partan en varias líneas */
 }
 
 /* Oculta los botones por defecto */
-.products-table td:last-child .actionIcon, .storage-table td:last-child .actionIcon {
+.products-table td:last-child .actionIcon,
+.storage-table td:last-child .actionIcon {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-/* Al hacer hover sobre la fila, muestra los botones */
-.products-table tbody tr:hover td:last-child .actionIcon, .storage-table tbody tr:hover td:last-child .actionIcon {
+/* Al hacer hover sobre la fila, muestra los botones, se recicla para cambiar la opacidad de los iconos del modo oscuro */
+.products-table tbody tr:hover td:last-child .actionIcon,
+.storage-table tbody tr:hover td:last-child .actionIcon,
+.mode .sun-moon i.sun, body.dark .mode .sun-moon i.moon {
   opacity: 1;
 }
 
@@ -512,7 +508,7 @@ body.dark .products-table tbody tr:hover, body.dark .storage-table tbody tr:hove
   border-radius: 8px;
   padding: 20px;
   width: 320px;
-  background-color: var(--sidebar-color); /* O el color que prefieras */
+  background-color: var(--sidebar-color);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -529,14 +525,12 @@ body.dark .products-table tbody tr:hover, body.dark .storage-table tbody tr:hove
   text-align: center;
 }
 
-/* Etiquetas del formulario */
 #addProductDialog label {
   margin-bottom: 5px;
   font-weight: 600;
   color: var(--text-color);
 }
 
-/* Inputs del formulario */
 #addProductDialog input {
   width: 100%;
   padding: 8px;
@@ -559,8 +553,8 @@ body.dark .products-table tbody tr:hover, body.dark .storage-table tbody tr:hove
 }
 
 /* Botones del dialog */
-#addProductDialog button {
-  padding: 8px 14px;
+#addProductDialog button, #deleteProductDialog button {
+  padding: 6px 12px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -570,7 +564,7 @@ body.dark .products-table tbody tr:hover, body.dark .storage-table tbody tr:hove
 
 /* Botón de aceptar (submit) */
 #addProductDialog button[type="submit"] {
-  background-color: #45a049;
+  background-color: #4CAF50;
   color: #fff;
 }
 
@@ -582,7 +576,7 @@ body.dark .products-table tbody tr:hover, body.dark .storage-table tbody tr:hove
 }
 
 /* Opcional: hover para botones */
-#addProductDialog button:hover {
+#addProductDialog button:hover, #deleteProductDialog button:hover {
   opacity: 0.9;
 }
 
@@ -641,22 +635,9 @@ body.dark #addProductDialog button {
   margin: 0;
 }
 
-#deleteProductDialog button {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
-}
-
 #deleteProductDialog button[type="submit"] {
   background-color: #f44336;
   color: #fff;
-}
-
-#deleteProductDialog button:hover {
-  opacity: 0.9;
 }
 
 body.dark #deleteProductDialog h3,
@@ -666,11 +647,6 @@ body.dark #deleteProductDialog p {
 
 body.dark #deleteProductDialog {
   background-color: var(--sidebar-color);
-}
-
-body.dark #deleteProductDialog button[type="submit"] {
-  background-color: #f44336;
-  color: #fff;
 }
 
 body.dark #deleteProductDialog button[type="reset"] {
@@ -699,13 +675,16 @@ body.dark #deleteProductDialog button[type="reset"] {
   margin-right: 0;
 }
 
-.actionIcon.edit { mask-image: url("/src/icons/bx-pencil.svg"); }
-.actionIcon.delete { mask-image: url("/src/icons/bx-trash.svg"); }
-
-.actionIcon.edit:hover {
-  background-color: orange;
+.actionIcon.edit { 
+  mask-image: url("/src/icons/bx-pencil.svg");
+  &:hover, &:focus {
+    background-color: orange;
+  }
 }
 
-.actionIcon.delete:hover {
-  background-color: red;
+.actionIcon.delete { 
+  mask-image: url("/src/icons/bx-trash.svg");
+  &:hover, &:focus {
+    background-color: red;
+  }
 }

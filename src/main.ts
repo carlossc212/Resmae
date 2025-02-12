@@ -2,7 +2,7 @@ import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import { generateInvoice } from './util/DocGenerator';
-import { db, initializeDatabase, addProduct, getProducts, deleteProduct, getStorageItems, addAmountToStorage } from './database';
+import { initializeDatabase, addProduct, getProducts, deleteProduct, getStorageItems, addAmountToStorage } from './database';
 
 if (started) {
   app.quit();
@@ -36,9 +36,9 @@ const createWindow = () => {
     mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
   }
 
-  ipcMain.handle('generate-invoice', async (_, filename)=>{generateInvoice(filename)});
+  ipcMain.handle('generate-invoice', (_, filename)=>{generateInvoice(filename)});
 
-  ipcMain.handle('add-product', async (_, product) => {
+  ipcMain.handle('add-product', (_, product) => {
     return addProduct(product.name, product.description, product.price);
   });
 
@@ -51,7 +51,7 @@ const createWindow = () => {
     }
   });
 
-  ipcMain.handle('delete-product', async (_, id) => {
+  ipcMain.handle('delete-product', (_, id) => {
     return deleteProduct(id);
   });
 
@@ -64,7 +64,7 @@ const createWindow = () => {
     }
   });
   
-  ipcMain.handle('add-amount-to-storage', async (_, { productId, amount }) => {
+  ipcMain.handle('add-amount-to-storage', (_, { productId, amount }) => {
     return addAmountToStorage(productId, amount);
   });
 };
