@@ -499,7 +499,7 @@ body.dark .products-table tbody tr:hover, body.dark .storage-table tbody tr:hove
   transition: background-color 0.5s ease;
 }
 
-#addProductDialog {
+#addProductDialog, #deleteProductDialog {
   position: fixed; /* Lo posiciona respecto a la ventana */
   top: 50%;
   left: 50%;
@@ -518,7 +518,7 @@ body.dark .products-table tbody tr:hover, body.dark .storage-table tbody tr:hove
 }
 
 /* Título del dialog */
-#addProductDialog h3 {
+#addProductDialog h3, #deleteProductDialog h3 {
   margin-bottom: 15px;
   font-size: 22px;
   color: var(--text-color);
@@ -543,7 +543,7 @@ body.dark .products-table tbody tr:hover, body.dark .storage-table tbody tr:hove
 }
 
 /* Ajuste para el menú de botones */
-#addProductDialog menu {
+#addProductDialog menu, #deleteProductDialog menu {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
@@ -587,7 +587,8 @@ body.dark #addProductDialog input {
 }
 
 /* Botón de cancelar en modo oscuro */
-body.dark #addProductDialog button[type="reset"] {
+body.dark #addProductDialog button[type="reset"],
+body.dark #deleteProductDialog button[type="reset"] {
   background-color: #444;            /* Fondo oscuro */
   color: var(--text-color);           /* Texto claro */
 }
@@ -595,29 +596,10 @@ body.dark #addProductDialog button[type="reset"] {
 /* Personaliza el focus en los inputs del diálogo */
 /* Define un borde de 1px transparente para inputs y botones dentro del diálogo */
 body.dark #addProductDialog input,
-body.dark #addProductDialog button {
+body.dark #addProductDialog button,
+body.dark #deleteProductDialog button {
   border: 1px solid transparent;
   box-sizing: border-box; /* Asegura que el borde se incluya en el tamaño total */
-}
-
-#deleteProductDialog {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: none;
-  border-radius: 8px;
-  padding: 20px;
-  width: 320px;
-  background-color: var(--sidebar-color);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-#deleteProductDialog h3 {
-  margin-bottom: 15px;
-  font-size: 22px;
-  color: var(--text-color);
-  text-align: center;
 }
 
 #deleteProductDialog p {
@@ -626,32 +608,9 @@ body.dark #addProductDialog button {
   text-align: center;
 }
 
-#deleteProductDialog menu {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  border: none;
-  padding: 0;
-  margin: 0;
-}
-
 #deleteProductDialog button[type="submit"] {
   background-color: #f44336;
   color: #fff;
-}
-
-body.dark #deleteProductDialog h3,
-body.dark #deleteProductDialog p {
-  color: var(--text-color);
-}
-
-body.dark #deleteProductDialog {
-  background-color: var(--sidebar-color);
-}
-
-body.dark #deleteProductDialog button[type="reset"] {
-  background-color: #444;
-  color: var(--text-color);
 }
 
 .actionIcon {
