@@ -106,7 +106,7 @@ body.dark {
   transition: var(--tran-03);
 }
 
-.sidebar.close .text, .mode .sun-moon i.moon, body.dark .mode .sun-moon i.sun {
+.sidebar.close .text, .mode .settings-icons i.moon, body.dark .mode .settings-icons i.sun {
   opacity: 0;
 }
 
@@ -320,7 +320,7 @@ body.dark .nav-link a:focus .icon {
 .products-icon { mask-image: url("/src/icons/bx-data.svg"); }
 .storage-icon { mask-image: url("/src/icons/bx-package.svg"); }
 .settings-icon { mask-image: url("/src/icons/bx-settings.svg"); }
-.exit-icon { mask-image: url("/src/icons/bx-log-out.svg"); }
+.exit-icon, .exit-confirmation { mask-image: url("/src/icons/bx-log-out.svg"); }
 .moon-icon { mask-image: url("/src/icons/bx-moon.svg"); }
 .sun-icon { mask-image: url("/src/icons/bx-sun.svg"); }
 
@@ -417,7 +417,7 @@ h2.title span {
 /* Al hacer hover sobre la fila, muestra los botones, se recicla para cambiar la opacidad de los iconos del modo oscuro */
 .products-table tbody tr:hover td:last-child .actionIcon,
 .storage-table tbody tr:hover td:last-child .actionIcon,
-.mode .sun-moon i.sun, body.dark .mode .sun-moon i.moon {
+.mode .settings-icons i.sun, body.dark .mode .settings-icons i.moon {
   opacity: 1;
 }
 
@@ -615,15 +615,15 @@ body.dark #exitDialog button {
 }
 
 /* Ajusta el contenedor de los iconos en el toggle de modo en settings */
-.sun-moon {
+.settings-icons {
   width: 40px;      /* Reduce el ancho */
   height: 30px;     /* Reduce el alto */
   position: relative;
   flex-shrink: 0;
 }
 
-/* Ajusta el tamaño de los íconos dentro del contenedor sun-moon */
-.sun-moon i {
+/* Ajusta el tamaño de los íconos dentro del contenedor */
+.settings-icons i {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -633,7 +633,7 @@ body.dark #exitDialog button {
   transition: var(--tran-05);
 }
 
-.mode {
+.setting-item {
   display: flex;
   align-items: center;
   padding: 12px 12px;
@@ -641,6 +641,7 @@ body.dark #exitDialog button {
   border-radius: 6px;
   min-width: 255px;
   transition: var(--tran-05);
+  margin-bottom: 10px;
 }
 
 .toggle-switch {
@@ -674,11 +675,12 @@ body.dark #exitDialog button {
   transition: var(--tran-05);
 }
 
-body.dark .switch::before {
+/* Agrega esta regla para que se mueva cuando el contenedor tenga la clase "active" */
+.toggle-switch.active .switch::before {
   left: 20px;
 }
 
-/* Muestra el ícono correcto según el modo */
+/* Muestra el icono correcto según el modo */
 body.dark .moon-icon, .sun-icon {
   display: block;
 }

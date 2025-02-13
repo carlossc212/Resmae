@@ -1,18 +1,30 @@
 import React, { useEffect, useState, useRef } from "react";
 
 interface Props {
-  onViewChanged: (view: "dashboard" | "invoices" | "products" | "storage" | "settings") => void;
+  onViewChanged: (
+    view: "dashboard" | "invoices" | "products" | "storage" | "settings"
+  ) => void;
 }
 
 const Sidebar = ({ onViewChanged }: Props) => {
   const [collapsed, setCollapsed] = useState(false);
   const exitDialogRef = useRef<HTMLDialogElement>(null);
 
+  // Función para manejar la acción de salir
+  const handleExit = () => {
+    const exitConfirmEnabled = localStorage.getItem("exitConfirm") === "true";
+    if (exitConfirmEnabled) {
+      exitDialogRef.current?.showModal();
+    } else {
+      window.close();
+    }
+  };
+
   useEffect(() => {
     window.electronAPI.onExitRequest(() => {
-      exitDialogRef.current?.showModal();
+      handleExit();
     });
-  });
+  }, []);
 
   return (
     <nav className={`sidebar ${collapsed ? "close" : ""}`}>
@@ -26,8 +38,6 @@ const Sidebar = ({ onViewChanged }: Props) => {
             <span className="profession">Facturas</span>
           </div>
         </div>
-        {/* Si se quiere excluir del tab order el input, se asigna tabIndex={-1}; 
-            si se quiere permitir, usar tabIndex={0} */}
         <div
           className="toggle"
           onClick={() => setCollapsed(!collapsed)}
@@ -104,12 +114,12 @@ const Sidebar = ({ onViewChanged }: Props) => {
           </li>
           <li className="nav-link">
             <a
-              onClick={() => exitDialogRef.current?.showModal()}
+              onClick={handleExit}
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  exitDialogRef.current?.showModal();
+                  handleExit();
                 }
               }}
             >
@@ -132,7 +142,6 @@ const Sidebar = ({ onViewChanged }: Props) => {
           </menu>
         </form>
       </dialog>
-      
     </nav>
   );
 };

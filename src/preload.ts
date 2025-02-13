@@ -9,5 +9,6 @@ contextBridge.exposeInMainWorld("electronAPI", {
     deleteProduct: (id: number) => ipcRenderer.invoke('delete-product', id),
     getStorageItems: () => ipcRenderer.invoke('get-storage-items'),
     addAmountToStorage: (productId: number, amount: number) => ipcRenderer.invoke('add-amount-to-storage', { productId, amount }),
-    onExitRequest: (callback: () => void) => ipcRenderer.on("show-exit-dialog", callback)
+    onExitRequest: (callback: () => void) => ipcRenderer.on("show-exit-dialog", callback),
+    requestExitDialog: () => ipcRenderer.send("request-exit-dialog")
 });
