@@ -4,23 +4,25 @@ interface Props {
   className?: string;
 }
 
-interface StorageItem {
-  productId: number;
+interface Product {
+  _id: string;
+  cod: number;
   name: string;
-  totalAmount: number;
-  addedAmount: number;
+  description: string;
+  price?: number;
+  stock?: number;
 }
 
 const Storage = ({ className }: Props) => {
-  const [storageItems, setStorageItems] = useState<StorageItem[]>([]);
+  const [storageItems, setStorageItems] = useState<Product[]>([]);
 
   useEffect(() => {
-    window.electronAPI.getStorageItems().then(setStorageItems);
+    window.electronAPI.getProducts().then(setStorageItems);
   }, []);
 
-  const handleAddAmount = (productId: number) => {
-    window.electronAPI.addAmountToStorage(productId, 1).then(() => {
-      window.electronAPI.getStorageItems().then(setStorageItems);
+  const handleAddStock = (productId: string) => {
+    window.electronAPI.addStockToStorage(productId, 1).then(() => {
+      window.electronAPI.getProducts().then(setStorageItems);
     });
   };
 
@@ -41,15 +43,15 @@ const Storage = ({ className }: Props) => {
           </thead>
           <tbody>
             {storageItems.map((item) => (
-              <tr key={item.productId}>
-                <td>{item.productId}</td>
+              <tr key={item._id}>
+                <td>{item.cod}</td>
                 <td>{item.name}</td>
-                <td>{item.totalAmount}</td>
+                <td>{item.stock}</td>
                 <td>
                   <button className="actionIcon edit"></button>
                   <button
                     className="actionIcon add"
-                    onClick={() => handleAddAmount(item.productId)}
+                    onClick={() => handleAddStock(item._id)}
                   >
                     +
                   </button>

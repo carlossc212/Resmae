@@ -4,10 +4,9 @@ import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("electronAPI", {
     generateInvoice: (filename: string) => ipcRenderer.invoke("generate-invoice", filename),
-    addProduct: (name: string, description: string, price: number) => ipcRenderer.invoke('add-product', { name, description, price }),
+    addProduct: (name: string, description: string, price: number, stock=0) => ipcRenderer.invoke('add-product', { name, description, price, stock }),
     getProducts: () => ipcRenderer.invoke('get-products'),
-    deleteProduct: (id: number) => ipcRenderer.invoke('delete-product', id),
-    getStorageItems: () => ipcRenderer.invoke('get-storage-items'),
-    addAmountToStorage: (productId: number, amount: number) => ipcRenderer.invoke('add-amount-to-storage', { productId, amount }),
+    deleteProduct: (id: string) => ipcRenderer.invoke('delete-product', id),
+    addStockToStorage: (productId: string, stock: number) => ipcRenderer.invoke('add-stock-to-storage', { productId, stock }),
     onExitRequest: (callback: () => void) => ipcRenderer.on("show-exit-dialog", callback)
 });

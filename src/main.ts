@@ -2,7 +2,7 @@ import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import { generateInvoice } from './util/DocGenerator';
-import { initializeDatabase, addProduct, getProducts, deleteProduct, getStorageItems, addAmountToStorage } from './database';
+import { addProduct, getProducts, deleteProduct, addStockToStorage } from './util/database';
 
 if (started) {
   app.quit();
@@ -32,8 +32,6 @@ const createWindow = () => {
     mainWindow.webContents.send("show-exit-dialog"); // Envía evento al renderer
   });
 
-  initializeDatabase(mainWindow);
-
   mainWindow.menuBarVisible = false;
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);     
@@ -44,7 +42,7 @@ const createWindow = () => {
   ipcMain.handle('generate-invoice', (_, filename)=>{generateInvoice(filename)});
 
   ipcMain.handle('add-product', (_, product) => {
-    return addProduct(product.name, product.description, product.price);
+    return addProduct({name: product.name, description: product.description, price: product.price, stock: product.stock});
   });
 
   ipcMain.handle('get-products', async () => {
@@ -52,7 +50,7 @@ const createWindow = () => {
       const products = await getProducts();
       return products;
     } catch (error) {
-      throw error;
+      console.error(error);
     }
   });
 
@@ -62,15 +60,15 @@ const createWindow = () => {
 
   ipcMain.handle('get-storage-items', async () => {
     try {
-      const storageItems = await getStorageItems();
+      const storageItems = await getProducts();
       return storageItems;
     } catch (error) {
-      throw error;
+      console.error(error);
     }
   });
   
-  ipcMain.handle('add-amount-to-storage', (_, { productId, amount }) => {
-    return addAmountToStorage(productId, amount);
+  ipcMain.handle('add-stock-to-storage', (_, { productId, stock }) => {
+    return addStockToStorage(productId, stock);
   });
 };
 

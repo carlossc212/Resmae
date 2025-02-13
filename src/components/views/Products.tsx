@@ -7,10 +7,12 @@ interface Props {
 const Products = ({ className }: Props) => {
   const [products, setProducts] = useState<
     Array<{
-      id: number;
+      _id: string;
+      cod: number;
       name: string;
       description: string;
       price?: number;
+      stock?: number;
     }>
   >([]);
 
@@ -24,10 +26,12 @@ const Products = ({ className }: Props) => {
   });
 
   const [currentProduct, setCurrentProduct] = useState<{
-    id: number;
+    _id: string;
+    cod: number;
     name: string;
     description: string;
     price?: number;
+    stock?: number;
   }>(null);
 
   const addProductDialogRef = useRef<HTMLDialogElement>(null);
@@ -64,8 +68,8 @@ const Products = ({ className }: Props) => {
           </thead>
           <tbody>
             {products.map((product) => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
+              <tr key={product._id}>
+                <td>{product.cod}</td>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
                 <td>€{product.price.toFixed(2)}</td>
@@ -162,7 +166,7 @@ const Products = ({ className }: Props) => {
 
         <dialog id="deleteProductDialog" ref={deleteProductDialogRef}>
           <form method="dialog" id="deleteProductForm" onSubmit={()=>{
-            window.electronAPI.deleteProduct(currentProduct.id);
+            window.electronAPI.deleteProduct(currentProduct._id);
             window.electronAPI.getProducts().then(setProducts);
             deleteProductDialogRef.current?.close();
           }}>
