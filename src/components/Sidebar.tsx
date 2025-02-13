@@ -90,27 +90,27 @@ const Sidebar = ({ onViewChanged }: Props) => {
                 <span className="text nav-text">Almacén</span>
               </a>
             </li>
-            <li className="nav-link">
-              <a
-                href="#settings"
-                tabIndex={0}
-                onClick={() => onViewChanged("settings")}
-              >
-                <div className="icon settings-icon"></div>
-                <span className="text nav-text">Configuración</span>
-              </a>
-            </li>
           </ul>
         </div>
 
         <div className="bottom-content" tabIndex={-1}>
-          <li className="exit-button nav-link">
+          <li className="nav-link">
+            <a
+              href="#settings"
+              tabIndex={0}
+              onClick={() => onViewChanged("settings")}
+            >
+              <div className="icon settings-icon"></div>
+              <span className="text nav-text">Configuración</span>
+            </a>
+          </li>
+          <li className="nav-link">
             <a
               onClick={() => exitDialogRef.current?.showModal()}
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
-                  window.close();
+                  exitDialogRef.current?.showModal();
                 }
               }}
             >
@@ -118,47 +118,22 @@ const Sidebar = ({ onViewChanged }: Props) => {
               <span className="text nav-text">Salir</span>
             </a>
           </li>
-          
-          <li className="mode" 
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  setDarkMode(!darkMode);
-                }
-              }}
-              onClick={() => setDarkMode(!darkMode)}
-              >
-            <div className="sun-moon" tabIndex={-1}>
-              <i className="icon sun-icon sun" tabIndex={-1}></i>
-              <i className="icon moon-icon moon" tabIndex={-1}></i>
-            </div>
-            <span className="mode-text text" tabIndex={-1}>
-              {
-                !collapsed ? `Modo ${darkMode ? "oscuro" : "claro"}` : ""
-              }
-            </span>
-            <div className="toggle-switch">
-              <span className="switch" tabIndex={-1}></span>
-            </div>
-          </li>
         </div>
       </div>
 
       <dialog id="exitDialog" ref={exitDialogRef}>
-        <form method="dialog" id="exitForm" onSubmit={(event) => {
-            window.close();
-          }}>
+        <form method="dialog" id="exitForm" onSubmit={() => window.close()}>
           <h3>Salir</h3>
           <p>¿Estás seguro?</p>
           <menu>
-            <button type="reset" onClick={()=>exitDialogRef.current?.close()}>Cancelar</button>
-            <button type="submit">
-              Salir
+            <button type="reset" onClick={() => exitDialogRef.current?.close()}>
+              Cancelar
             </button>
+            <button type="submit">Salir</button>
           </menu>
         </form>
       </dialog>
-
+      
     </nav>
   );
 };

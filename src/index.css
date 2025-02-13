@@ -43,18 +43,17 @@ body {
   transition: var(--tran-05);
 }
 
-::selection {
-  background-color: var(--primary-color);
-  color: #fff;
-}
-
 body.dark {
   --body-color: #18191a;
   --sidebar-color: #242526;
   --primary-color: #3a3b3c;
   --primary-color-light: #3a3b3c;
-  --toggle-color: #fff;
+  --toggle-color: #ddd;
   --text-color: #ccc;
+}
+
+.sidebar li.search-box, .toggle, .nav-link, .actionIcon, .setting-item, .add-product-button, button {
+  cursor: pointer;
 }
 
 .sidebar {
@@ -111,7 +110,7 @@ body.dark {
   opacity: 0;
 }
 
-.sidebar.close  .text.nav-text{
+.sidebar.close .nav-text{
   animation: hide-text 0.3s linear forwards;
 }
 
@@ -178,7 +177,6 @@ header .image-text .profession {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   transition: var(--tran-05);
 }
 
@@ -194,10 +192,9 @@ header .image-text .profession {
   margin-top: 40px;
 }
 
-.sidebar li.search-box, .exit-button {
+.sidebar li.search-box{
   border-radius: 6px;
   background-color: var(--primary-color-light);
-  cursor: pointer;
   transition: var(--tran-05);
 }
 
@@ -214,7 +211,7 @@ header .image-text .profession {
   transition: var(--tran-05);
 }
 
-.sidebar li a, .exit-button {
+.sidebar li a{
   list-style: none;
   height: 100%;
   background-color: transparent;
@@ -267,60 +264,6 @@ body.dark .nav-link a:focus .icon {
 
 .menu-bar::-webkit-scrollbar {
   display: none;
-}
-
-.sidebar .menu-bar .mode {
-  border-radius: 6px;
-  background-color: var(--primary-color-light);
-  position: relative;
-  transition: var(--tran-05);
-  cursor: pointer;
-}
-
-.menu-bar .mode .sun-moon {
-  height: 50px;
-  width: 60px;
-}
-
-.mode .sun-moon i {
-  position: absolute;
-}
-
-.menu-bar .bottom-content .toggle-switch {
-  position: absolute;
-  right: 0;
-  height: 100%;
-  min-width: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-}
-
-.toggle-switch .switch {
-  position: relative;
-  height: 22px;
-  width: 40px;
-  border-radius: 25px;
-  background-color: var(--toggle-color);
-  transition: var(--tran-05);
-}
-
-.switch::before {
-  content: "";
-  position: absolute;
-  height: 15px;
-  width: 15px;
-  border-radius: 50%;
-  top: 50%;
-  left: 5px;
-  transform: translateY(-50%);
-  background-color: var(--sidebar-color);
-  transition: var(--tran-04);
-}
-
-body.dark .switch::before {
-  left: 20px;
 }
 
 .home {
@@ -381,16 +324,12 @@ body.dark .switch::before {
 .moon-icon { mask-image: url("/src/icons/bx-moon.svg"); }
 .sun-icon { mask-image: url("/src/icons/bx-sun.svg"); }
 
-.moon-icon, .dark .sun-icon { display: none; }
-.sun-icon, .dark .moon-icon { display: block; }
-
 .add-product-button {
   background-color: #4CAF50;
   color: white;
   border: none;
   padding: 6px 12px;
   font-size: 14px;
-  cursor: pointer;
   border-radius: 5px;
   display: inline-block;
   margin-left: auto;
@@ -567,7 +506,6 @@ body.dark .products-table tbody tr:hover, body.dark .storage-table tbody tr:hove
   padding: 6px 12px;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s ease;
 }
@@ -643,7 +581,6 @@ body.dark #exitDialog button {
   mask-repeat: no-repeat;
   mask-position: center;
   transition: background-color 0.3s ease;
-  cursor: pointer;
   margin-right: 15px; /* Espaciado entre los botones */
 }
 
@@ -664,4 +601,88 @@ body.dark #exitDialog button {
   &:hover, &:focus {
     background-color: red;
   }
+}
+
+.settings-content {
+  padding: 0px 40px;
+}
+
+.settings-text {
+  font-size: 17px;
+  font-weight: 200;
+  color: var(--text-color);
+  padding: 0px 10px;
+}
+
+/* Ajusta el contenedor de los iconos en el toggle de modo en settings */
+.sun-moon {
+  width: 40px;      /* Reduce el ancho */
+  height: 30px;     /* Reduce el alto */
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Ajusta el tamaño de los íconos dentro del contenedor sun-moon */
+.sun-moon i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  transition: var(--tran-05);
+}
+
+.mode {
+  display: flex;
+  align-items: center;
+  padding: 12px 12px;
+  background-color: var(--primary-color-light);
+  border-radius: 6px;
+  min-width: 255px;
+  transition: var(--tran-05);
+}
+
+.toggle-switch {
+  margin-left: auto;
+  height: 100%;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.switch {
+  position: relative;
+  height: 22px;
+  width: 40px;
+  border-radius: 25px;
+  background-color: var(--toggle-color);
+}
+
+.switch::before {
+  content: "";
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  background-color: var(--sidebar-color);
+  transition: var(--tran-05);
+}
+
+body.dark .switch::before {
+  left: 20px;
+}
+
+/* Muestra el ícono correcto según el modo */
+body.dark .moon-icon, .sun-icon {
+  display: block;
+}
+
+body.dark .sun-icon, .moon-icon {
+  display: none;
 }
