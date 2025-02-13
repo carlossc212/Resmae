@@ -6,15 +6,13 @@ interface Props {
 
 const Sidebar = ({ onViewChanged }: Props) => {
   const [collapsed, setCollapsed] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const exitDialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    document.body.classList.toggle("dark", darkMode);
     window.electronAPI.onExitRequest(() => {
       exitDialogRef.current?.showModal();
     });
-  }, [darkMode]);
+  });
 
   return (
     <nav className={`sidebar ${collapsed ? "close" : ""}`}>
@@ -110,6 +108,7 @@ const Sidebar = ({ onViewChanged }: Props) => {
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
                   exitDialogRef.current?.showModal();
                 }
               }}

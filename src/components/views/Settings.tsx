@@ -44,7 +44,7 @@ const Settings = ({ className }: Props) => {
               </div>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
     </>
   );
